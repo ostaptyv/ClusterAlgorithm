@@ -82,8 +82,7 @@ fileprivate func retrieveAtomData(fromString dataString: String, start: String, 
 
 // MARK: - Main
 func makeSphereClustersAroundGermaniumAtoms(usingDataFrom textDataFileURL: URL,
-                                            count germaniumCountInCluster: UInt,
-                                            a: Decimal) throws {
+                                            count germaniumCountInCluster: UInt) throws {
     guard germaniumCountInCluster != 0 else {
         throw "⛔️ Error: You can't specify quantity of germanium atoms as zero because every germanium cluster contains at least 1 atom (itself)"
     }
@@ -168,7 +167,6 @@ func makeSphereClustersAroundGermaniumAtoms(usingDataFrom textDataFileURL: URL,
             }
         }
 // --------------------------- Prints sorted array --------------------------------
-//    // FIXME: Debug code
 //    atomDataSplitted.forEach { atomTuple in
 //        print("\(atomTuple),")
 //    }
@@ -187,26 +185,43 @@ func makeSphereClustersAroundGermaniumAtoms(usingDataFrom textDataFileURL: URL,
     
     // Define sphere radius based on one germanium atom to use it further in the algorithm
     print("------------------ START DEFINING SPHERE RADIUS --------------------")
-    var sphereAreaRadius: Decimal = 0.0
-    var atomsInSphereAreaCount = 0
+    var lowerRadiusBound: Decimal = 0.0
+    var upperRadiusBound: Decimal = atomDataChunked.last![0][0].z - atomDataChunked.first![0][0].z
+    var sphereAreaRadius: Decimal
+    var currentGermaniumCountDifference = 0
+    var previousGermaniumCountDifference = 0
     
-    while atomsInSphereAreaCount < germaniumCountInCluster {
-        atomsInSphereAreaCount = 0
-        sphereAreaRadius += 0.01
-        let germaniumAtom = atomDataSplitted[germaniumIndices.first!]
+    repeat {
+        previousGermaniumCountDifference = currentGermaniumCountDifference
+        print("Suggested sphere radius (lower): \(lowerRadiusBound)", terminator: "\n")
+        print("Suggested sphere radius (upper): \(upperRadiusBound)", terminator: "\n")
+        var atomsInSphereAreaCount = 0
+        let middleRadius = ((upperRadiusBound - lowerRadiusBound) / 2) + lowerRadiusBound
+        // FIXME: Imitate checking the central atom with coordinates (x: 0.0, y: 0.0, z: 0.0). This is made to prevent choosing germanium atom near the surface of the nanowire, because in that case radius maybe larger than it's needed. Type and ID values don't have a matter here
+        let germaniumAtom: Atom = .zero // atomDataSplitted[germaniumIndices.first!]
         
         for atomElement in atomDataSplitted {
             let xSquared = pow(atomElement.x - germaniumAtom.x, 2)
             let ySquared = pow(atomElement.y - germaniumAtom.y, 2)
             let zSquared = pow(atomElement.z - germaniumAtom.z, 2)
-            let radiusSquared = pow(sphereAreaRadius, 2)
+            let radiusSquared = pow(middleRadius, 2)
             
             if xSquared + ySquared + zSquared <= radiusSquared {
                 atomsInSphereAreaCount += 1
             }
         }
-        print("Suggested sphere radius: \(sphereAreaRadius), count: \(atomsInSphereAreaCount)", terminator: "\n")
-    }
+        
+        currentGermaniumCountDifference = atomsInSphereAreaCount - germaniumCountInCluster
+        if currentGermaniumCountDifference > 0 {
+            upperRadiusBound = middleRadius
+        } else {
+            lowerRadiusBound = middleRadius
+        }
+        
+        print("Suggested sphere radius: \(middleRadius), count: \(atomsInSphereAreaCount)", terminator: "\n")
+        sphereAreaRadius = middleRadius
+        
+    } while abs(previousGermaniumCountDifference) != abs(currentGermaniumCountDifference) || currentGermaniumCountDifference < 0
     print("------------------- END DEFINING SPHERE RADIUS ---------------------")
     
     // FIXME: Used if we need to generate cluster with specific radius; should be rewrited as a separate option of a algorithm standing together with a count defined clusters
@@ -215,30 +230,29 @@ func makeSphereClustersAroundGermaniumAtoms(usingDataFrom textDataFileURL: URL,
     // Create cubic areas around germnaium atoms
     print("\n------------------- START GENERATING CUBE AREAS --------------------")
     var germaniumCubeAreas = [Int: [Int]]() // the key is the index of germanium atom in atom array, the value is atom indices in atom array inside the cubic area associated with the given germanium atom
-    
     for (germaniumIndexNumber, germaniumIndex) in germaniumIndices.enumerated() {
         var cubeAreaIndices = [Int]()
         let cubeAreaEdgeHalfLength = sphereAreaRadius
         let germaniumAtom = atomDataSplitted[germaniumIndex]
-//        let germaniumAtom: Atom! = atomDataSplitted.first { element -> Bool in
-//            return element.x == 0.0 && element.y == 0.0 && element.z == 0.0
-//        }
+        
         for zChunk in atomDataChunked {
             let z = zChunk[0][0].z
+            let cubeZRange = (germaniumAtom.z - cubeAreaEdgeHalfLength...germaniumAtom.z + cubeAreaEdgeHalfLength)
             if !cubeZRange.contains(z) {
                 continue
             }
-            
+
             for yChunk in zChunk {
                 let y = yChunk[0].y
+                let cubeYRange = (germaniumAtom.y - cubeAreaEdgeHalfLength...germaniumAtom.y + cubeAreaEdgeHalfLength)
                 if !cubeYRange.contains(y) {
                     continue
                 }
-                
+
                 for element in yChunk {
                     let x = element.x
                     let cubeXRange = (germaniumAtom.x - cubeAreaEdgeHalfLength...germaniumAtom.x + cubeAreaEdgeHalfLength)
-                    
+
                     if cubeXRange.contains(x) {
                         cubeAreaIndices.append(element.id)
                         if germaniumAtom.id != element.id {
@@ -253,25 +267,22 @@ func makeSphereClustersAroundGermaniumAtoms(usingDataFrom textDataFileURL: URL,
         print("Germanium atoms: \(germaniumIndexNumber + 1) out of \(germaniumCount); cube area count: \(germaniumCubeAreas.count)", terminator: "\n")
     }
     print("--------------------- END GENERATING CUBE AREAS ----------------------")
-    
+
     // Create sphere areas around germanium atoms
     print("\n------------------- START GENERATING SPHERE AREAS --------------------")
     var germaniumSphereAreas = [Int: [Int]]() // the key is the index of germanium atom in atom array, the value is atom indices in atom array inside the spheric area associated with the given germanium atom
-    
+
     for (germaniumIndexNumber, germaniumIndex) in germaniumIndices.enumerated() {
         var sphereAreaIndices = [Int]()
         let germaniumAtom = atomDataSplitted[germaniumIndex]
-//        let germaniumAtom: Atom! = atomDataSplitted.first { element -> Bool in
-//            return element.x == 0.0 && element.y == 0.0 && element.z == 0.0
-//        }
-        
+
         for cubeAreaAtomIndex in germaniumCubeAreas[germaniumIndex]! {
             let atomElement = atomDataSplitted[cubeAreaAtomIndex]
             let xSquared = pow(atomElement.x - germaniumAtom.x, 2)
             let ySquared = pow(atomElement.y - germaniumAtom.y, 2)
             let zSquared = pow(atomElement.z - germaniumAtom.z, 2)
             let radiusSquared = pow(sphereAreaRadius, 2)
-            
+
             if xSquared + ySquared + zSquared <= radiusSquared {
                 sphereAreaIndices.append(atomElement.id)
             }
@@ -280,7 +291,7 @@ func makeSphereClustersAroundGermaniumAtoms(usingDataFrom textDataFileURL: URL,
         print("Germanium atoms: \(germaniumIndexNumber + 1) out of \(germaniumCount); sphere area count: \(germaniumSphereAreas.count)", terminator: "\n")
     }
     print("-------------------- END GENERATING SPHERE AREAS ---------------------")
-    
+
     // Calculate the distances between atoms inside spheric area and germanium center, take quantity equal to 'germaniumCountInCluster' and mark them as "should be converted"
     print("\n--------- BEGIN CALCULATING DISTANCES BETWEEN ATOMS IN SPHERES ---------")
     for (germaniumIndexNumber, element: (germaniumIndex, sphereAreaIndices)) in germaniumSphereAreas.enumerated() {

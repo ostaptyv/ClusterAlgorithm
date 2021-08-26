@@ -9,12 +9,11 @@ import Foundation
 
 let fileName = "Ge500-6.data"
 
-if let currentDirectoryURL = URL(string: "file:///Users/admin/Documents/Diploma/XcodeProjects/(working)SphereExpandAlgorithm/SphereExpandAlgorithm/" + fileName) {
+if let currentDirectoryURL = URL(string: "file:///Users/admin/Documents/Diploma/XcodeProjects/ClusterAlgoritrhm/" + fileName) {
     do {
         print("*** \(fileName) ***")
         try makeSphereClustersAroundGermaniumAtoms(usingDataFrom: currentDirectoryURL,
-                                               count: 50,
-                                               a: 5.432)
+                                                   count: 6)
         print("✅ Operation successful.")
     } catch {
         print(error.localizedDescription)

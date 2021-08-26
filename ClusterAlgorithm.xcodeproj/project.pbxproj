@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		842ED72527BA709E0003C997 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
-		846C7A142643258D00E04A83 /* SphereExpandAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SphereExpandAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
+		846C7A142643258D00E04A83 /* ClusterAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClusterAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		846C7A172643258D00E04A83 /* SphereExpandAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereExpandAlgorithm.swift; sourceTree = "<group>"; };
 		846C7A1E264356CB00E04A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,7 +61,7 @@
 		846C7A152643258D00E04A83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				846C7A142643258D00E04A83 /* SphereExpandAlgorithm */,
+				846C7A142643258D00E04A83 /* ClusterAlgorithm */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,9 +79,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		846C7A132643258D00E04A83 /* SphereExpandAlgorithm */ = {
+		846C7A132643258D00E04A83 /* ClusterAlgorithm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 846C7A1B2643258D00E04A83 /* Build configuration list for PBXNativeTarget "SphereExpandAlgorithm" */;
+			buildConfigurationList = 846C7A1B2643258D00E04A83 /* Build configuration list for PBXNativeTarget "ClusterAlgorithm" */;
 			buildPhases = (
 				846C7A102643258D00E04A83 /* Sources */,
 				846C7A112643258D00E04A83 /* Frameworks */,
@@ -91,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = SphereExpandAlgorithm;
+			name = ClusterAlgorithm;
 			productName = SphereExpandAlgorithm;
-			productReference = 846C7A142643258D00E04A83 /* SphereExpandAlgorithm */;
+			productReference = 846C7A142643258D00E04A83 /* ClusterAlgorithm */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -110,7 +110,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 846C7A0F2643258D00E04A83 /* Build configuration list for PBXProject "SphereExpandAlgorithm" */;
+			buildConfigurationList = 846C7A0F2643258D00E04A83 /* Build configuration list for PBXProject "ClusterAlgorithm" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -123,7 +123,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				846C7A132643258D00E04A83 /* SphereExpandAlgorithm */,
+				846C7A132643258D00E04A83 /* ClusterAlgorithm */,
 			);
 		};
 /* End PBXProject section */
@@ -278,7 +278,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		846C7A0F2643258D00E04A83 /* Build configuration list for PBXProject "SphereExpandAlgorithm" */ = {
+		846C7A0F2643258D00E04A83 /* Build configuration list for PBXProject "ClusterAlgorithm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				846C7A192643258D00E04A83 /* Debug */,
@@ -287,7 +287,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		846C7A1B2643258D00E04A83 /* Build configuration list for PBXNativeTarget "SphereExpandAlgorithm" */ = {
+		846C7A1B2643258D00E04A83 /* Build configuration list for PBXNativeTarget "ClusterAlgorithm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				846C7A1C2643258D00E04A83 /* Debug */,
