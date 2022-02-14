@@ -7,8 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841E955E27BAE5CB003A1B36 /* SphereAreaGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E955D27BAE5CB003A1B36 /* SphereAreaGenerator.swift */; };
+		841E956027BAF7D7003A1B36 /* InteratomDistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E955F27BAF7D7003A1B36 /* InteratomDistanceCalculator.swift */; };
+		841E956227BC6E29003A1B36 /* AtomsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E956127BC6E29003A1B36 /* AtomsConverter.swift */; };
+		841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */; };
+		841E957327BD1656003A1B36 /* ClusterStrategyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */; };
 		842ED72627BA709E0003C997 /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72527BA709E0003C997 /* Atom.swift */; };
-		846C7A182643258D00E04A83 /* SphereExpandAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A172643258D00E04A83 /* SphereExpandAlgorithm.swift */; };
+		842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72927BA7B070003C997 /* String+LocalizedError.swift */; };
+		842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72B27BA7B280003C997 /* Array+chunk.swift */; };
+		842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72D27BA7B420003C997 /* Array+atomDescription.swift */; };
+		842ED73027BA7B5B0003C997 /* String+initDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72F27BA7B5A0003C997 /* String+initDecimal.swift */; };
+		842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */; };
+		842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73327BA8E580003C997 /* DataPreparer.swift */; };
+		842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */; };
+		842ED73827BAAA8E0003C997 /* CubeAreaGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73727BAAA8E0003C997 /* CubeAreaGenerator.swift */; };
+		846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */; };
 		846C7A1F264356CB00E04A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A1E264356CB00E04A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,9 +38,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		841E955D27BAE5CB003A1B36 /* SphereAreaGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereAreaGenerator.swift; sourceTree = "<group>"; };
+		841E955F27BAF7D7003A1B36 /* InteratomDistanceCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteratomDistanceCalculator.swift; sourceTree = "<group>"; };
+		841E956127BC6E29003A1B36 /* AtomsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomsConverter.swift; sourceTree = "<group>"; };
+		841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterAlgorithm.swift; sourceTree = "<group>"; };
+		841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterStrategyProtocol.swift; sourceTree = "<group>"; };
 		842ED72527BA709E0003C997 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
+		842ED72927BA7B070003C997 /* String+LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalizedError.swift"; sourceTree = "<group>"; };
+		842ED72B27BA7B280003C997 /* Array+chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+chunk.swift"; sourceTree = "<group>"; };
+		842ED72D27BA7B420003C997 /* Array+atomDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+atomDescription.swift"; sourceTree = "<group>"; };
+		842ED72F27BA7B5A0003C997 /* String+initDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+initDecimal.swift"; sourceTree = "<group>"; };
+		842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAMMPSSerializer.swift; sourceTree = "<group>"; };
+		842ED73327BA8E580003C997 /* DataPreparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPreparer.swift; sourceTree = "<group>"; };
+		842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereRadiusCalculator.swift; sourceTree = "<group>"; };
+		842ED73727BAAA8E0003C997 /* CubeAreaGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeAreaGenerator.swift; sourceTree = "<group>"; };
 		846C7A142643258D00E04A83 /* ClusterAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClusterAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
-		846C7A172643258D00E04A83 /* SphereExpandAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereExpandAlgorithm.swift; sourceTree = "<group>"; };
+		846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCountStrategy.swift; sourceTree = "<group>"; };
 		846C7A1E264356CB00E04A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,6 +68,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841E957427BD1A13003A1B36 /* Strategies */ = {
+			isa = PBXGroup;
+			children = (
+				841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */,
+				846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */,
+			);
+			path = Strategies;
+			sourceTree = "<group>";
+		};
+		841E957527BD1A27003A1B36 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */,
+				842ED73327BA8E580003C997 /* DataPreparer.swift */,
+				842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */,
+				842ED73727BAAA8E0003C997 /* CubeAreaGenerator.swift */,
+				841E955D27BAE5CB003A1B36 /* SphereAreaGenerator.swift */,
+				841E955F27BAF7D7003A1B36 /* InteratomDistanceCalculator.swift */,
+				841E956127BC6E29003A1B36 /* AtomsConverter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		842ED72427BA708E0003C997 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -50,10 +99,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		842ED72727BA7AB20003C997 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */,
+				841E957427BD1A13003A1B36 /* Strategies */,
+				841E957527BD1A27003A1B36 /* Services */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		842ED72827BA7AF40003C997 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				842ED72F27BA7B5A0003C997 /* String+initDecimal.swift */,
+				842ED72927BA7B070003C997 /* String+LocalizedError.swift */,
+				842ED72B27BA7B280003C997 /* Array+chunk.swift */,
+				842ED72D27BA7B420003C997 /* Array+atomDescription.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		846C7A0B2643258D00E04A83 = {
 			isa = PBXGroup;
 			children = (
-				846C7A162643258D00E04A83 /* SphereExpandAlgorithm */,
+				846C7A162643258D00E04A83 /* ClusterAlgorithm */,
 				846C7A152643258D00E04A83 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,14 +136,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		846C7A162643258D00E04A83 /* SphereExpandAlgorithm */ = {
+		846C7A162643258D00E04A83 /* ClusterAlgorithm */ = {
 			isa = PBXGroup;
 			children = (
 				846C7A1E264356CB00E04A83 /* main.swift */,
+				842ED72827BA7AF40003C997 /* Extensions */,
 				842ED72427BA708E0003C997 /* Model */,
-				846C7A172643258D00E04A83 /* SphereExpandAlgorithm.swift */,
+				842ED72727BA7AB20003C997 /* Algorithm */,
 			);
-			path = SphereExpandAlgorithm;
+			path = ClusterAlgorithm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +205,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				846C7A1F264356CB00E04A83 /* main.swift in Sources */,
+				842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */,
+				842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */,
+				842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */,
+				842ED73827BAAA8E0003C997 /* CubeAreaGenerator.swift in Sources */,
+				842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */,
 				842ED72627BA709E0003C997 /* Atom.swift in Sources */,
-				846C7A182643258D00E04A83 /* SphereExpandAlgorithm.swift in Sources */,
+				841E956227BC6E29003A1B36 /* AtomsConverter.swift in Sources */,
+				841E955E27BAE5CB003A1B36 /* SphereAreaGenerator.swift in Sources */,
+				846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */,
+				841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */,
+				842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */,
+				841E956027BAF7D7003A1B36 /* InteratomDistanceCalculator.swift in Sources */,
+				842ED73027BA7B5B0003C997 /* String+initDecimal.swift in Sources */,
+				842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */,
+				841E957327BD1656003A1B36 /* ClusterStrategyProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
