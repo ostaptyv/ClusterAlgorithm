@@ -9,6 +9,7 @@ import Foundation
 
 enum ClusterMetric {
     case count(UInt)
+    case radius(Decimal)
 }
 
 class ClusterAlgorithm {
@@ -19,6 +20,8 @@ class ClusterAlgorithm {
         switch metric {
         case .count(let germaniumCountInCluster):
             strategy = try ClusterCountStrategy(germaniumCountInCluster: germaniumCountInCluster)
+        case .radius(let clusterRadius):
+            strategy = try ClusterRadiusStrategy(clusterRadius: clusterRadius)
         }
         
         strategy.fileURL = fileURL

@@ -1,31 +1,29 @@
 //
-//  ClusterCountStrategy.swift
+//  ClusterRadiusStrategy.swift
 //  ClusterAlgorithm
 //
-//  Created by Ostap Tyvonovych on 05.05.2021.
+//  Created by Ostap Tyvonovych on 16.02.2022.
 //
 
 import Foundation
 
-class ClusterCountStrategy: ClusterStrategyProtocol {
+class ClusterRadiusStrategy: ClusterStrategyProtocol {
     
     private let lammpsSerializer = LAMMPSSerializer()
     private let dataPreparer = DataPreparer()
-    private let sphereRadiusCalculator = SphereRadiusCalculator()
     private let cubeAreaGenerator = CubeAreaGenerator()
     private let sphereAreaGenerator = SphereAreaGenerator()
-    private let interatomDistanceCalculator = InteratomDistanceCalculator()
     private let atomsConverter = AtomsConverter()
     
     private var atomDataSplitted = [Atom]()
-    let germaniumCountInCluster: Int
+    let clusterRadius: Decimal
     var fileURL: URL?
         
     func execute() throws {
         guard let unwrappedFileUrl = fileURL else {
             throw "File URL wasn't specified before executing a strategy"
         }
-        guard germaniumCountInCluster > 1 else {
+        guard !clusterRadius.isZero else {
             return
         }
         
@@ -40,18 +38,6 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
         let germaniumCount = germaniumIndices.count
         print("* General number of Ge atoms found: \(germaniumCount)")
         
-        // Define sphere radius based on one germanium atom to use it further in the algorithm
-        var sphereAreaRadius: Decimal = 0.0
-        
-        performOperation(title: "DEFINING SPHERE RADIUS") {
-            let upperRadiusBound = atomDataChunked.last![0][0].z - atomDataChunked.first![0][0].z
-            
-            sphereAreaRadius = sphereRadiusCalculator
-                .defineSphereRadius(for: germaniumCountInCluster,
-                                       atomDataSplitted: atomDataSplitted,
-                                       upperRadiusBound: upperRadiusBound)
-        }
-        
         // Create cubic areas around germanium atoms
         var germaniumCubeAreas = [Atom: [Atom]]()
         
@@ -62,7 +48,7 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
             
             germaniumCubeAreas = cubeAreaGenerator
                 .generateCubeAreas(germaniumAtoms: germaniumAtoms,
-                                   cubeAreaEdgeHalfLength: sphereAreaRadius,
+                                   cubeAreaEdgeHalfLength: clusterRadius,
                                    atomDataChunked: atomDataChunked)
         }
         
@@ -72,28 +58,27 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
         performOperation(title: "GENERATING SPHERE AREAS") {
             germaniumSphereAreas = sphereAreaGenerator
                 .generateSphereAreas(germaniumCubeAreas: germaniumCubeAreas,
-                                     sphereAreaRadius: sphereAreaRadius)
+                                     sphereAreaRadius: clusterRadius)
         }
         
-        // Calculate the distances between atoms inside spheric area and germanium center, take quantity equal to 'germaniumCountInCluster' and mark them as "should be converted"
-        var atomsToConvert = [Atom]()
-        
-        performOperation(title: "CALCULATING DISTANCES BETWEEN ATOMS IN SPHERES") {
-            atomsToConvert = interatomDistanceCalculator
-                .calculate(germaniumSphereAreas: germaniumSphereAreas,
-                           germaniumCountInCluster: germaniumCountInCluster)
-        }
+        var atomsToConvertCount = 0
         
         // Convert atoms to Germanium ones
         performOperation(title: "CONVERTING FINAL ATOMS") {
-            let atomIndicesToConvert = atomsToConvert.map { atom in
-                return atom.id
-            }
+            let atomIndicesToConvert = germaniumSphereAreas
+                .flatMap { (_, atomsToConvert) in
+                    return atomsToConvert
+                }
+                .map { atom in
+                    return atom.id
+                }
+            atomsToConvertCount = atomIndicesToConvert.count
+            
             atomsConverter.convertAtoms(at: atomIndicesToConvert, in: &atomDataSplitted)
         }
         
         // Final statistics
-        let germaniumCountAfterConverting = atomsToConvert.count + germaniumCount // atomToConvert includes Si atoms which was then converted to Ge atoms so we need to add the germanium atoms which, in fact, are "centers" of the resulting clusters
+        let germaniumCountAfterConverting = atomsToConvertCount + germaniumCount // atomToConvert includes Si atoms which was then converted to Ge atoms so we need to add the germanium atoms which, in fact, are "centers" of the resulting clusters
         logConvertingStatistics(before: germaniumCount, after: germaniumCountAfterConverting)
         
         dataPreparer.makeOneBasedAtomIDs(in: &atomDataSplitted)
@@ -159,11 +144,10 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
         print("\(hyphenDivider)- END \(title.uppercased()) -\(hyphenDivider)")
     }
     
-    init(germaniumCountInCluster: UInt) throws {
-        guard germaniumCountInCluster != 0 else {
-            throw "Error: You can't specify quantity of germanium atoms as zero because every germanium cluster contains at least 1 atom (itself)"
+    init(clusterRadius: Decimal) throws {
+        guard !clusterRadius.isSignMinus else {
+            throw "Error: You can't specify negative radius"
         }
-        
-        self.germaniumCountInCluster = Int(germaniumCountInCluster)
+        self.clusterRadius = clusterRadius
     }
 }

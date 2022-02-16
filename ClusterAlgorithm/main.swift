@@ -25,7 +25,7 @@ if let fileURL = URL(string: "file:///Users/admin/Documents/Diploma/XcodeProject
         print("*** \(fileName) ***")
         
         let clusterAlgorithm = ClusterAlgorithm(fileURL: fileURL)
-        try clusterAlgorithm.createClusters(with: .count(100))
+        try clusterAlgorithm.createClusters(with: .radius(25.807432))// + 1.4))
         
         print("✅ Operation successful.")
     } catch {

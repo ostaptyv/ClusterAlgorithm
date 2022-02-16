@@ -12,6 +12,7 @@
 		841E956227BC6E29003A1B36 /* AtomsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E956127BC6E29003A1B36 /* AtomsConverter.swift */; };
 		841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */; };
 		841E957327BD1656003A1B36 /* ClusterStrategyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */; };
+		841E958327BD5ECD003A1B36 /* ClusterRadiusStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E958227BD5ECD003A1B36 /* ClusterRadiusStrategy.swift */; };
 		842ED72627BA709E0003C997 /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72527BA709E0003C997 /* Atom.swift */; };
 		842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72927BA7B070003C997 /* String+LocalizedError.swift */; };
 		842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72B27BA7B280003C997 /* Array+chunk.swift */; };
@@ -43,6 +44,7 @@
 		841E956127BC6E29003A1B36 /* AtomsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomsConverter.swift; sourceTree = "<group>"; };
 		841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterAlgorithm.swift; sourceTree = "<group>"; };
 		841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterStrategyProtocol.swift; sourceTree = "<group>"; };
+		841E958227BD5ECD003A1B36 /* ClusterRadiusStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterRadiusStrategy.swift; sourceTree = "<group>"; };
 		842ED72527BA709E0003C997 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
 		842ED72927BA7B070003C997 /* String+LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalizedError.swift"; sourceTree = "<group>"; };
 		842ED72B27BA7B280003C997 /* Array+chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+chunk.swift"; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */,
 				846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */,
+				841E958227BD5ECD003A1B36 /* ClusterRadiusStrategy.swift */,
 			);
 			path = Strategies;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */,
 				842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */,
 				842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */,
+				841E958327BD5ECD003A1B36 /* ClusterRadiusStrategy.swift in Sources */,
 				842ED73827BAAA8E0003C997 /* CubeAreaGenerator.swift in Sources */,
 				842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */,
 				842ED72627BA709E0003C997 /* Atom.swift in Sources */,
