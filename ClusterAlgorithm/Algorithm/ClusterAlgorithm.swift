@@ -9,7 +9,7 @@ import Foundation
 
 enum ClusterMetric {
     case count(UInt)
-    case radius(Decimal)
+    case radius(Double)
 }
 
 class ClusterAlgorithm {

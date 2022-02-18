@@ -8,7 +8,7 @@
 import Foundation
 
 struct SphereAreaGenerator {
-    func generateSphereAreas(germaniumCubeAreas: [Atom: [Atom]], sphereAreaRadius: Decimal) -> [Atom: [Atom]] {
+    func generateSphereAreas(germaniumCubeAreas: [Atom: [Atom]], sphereAreaRadius: Double) -> [Atom: [Atom]] {
         var germaniumSphereAreas = [Atom: [Atom]]() // the key is a germanium atom, the value are atoms inside the spheric area associated with the given germanium atom
  
         let germaniumAtoms = [Atom](germaniumCubeAreas.keys)

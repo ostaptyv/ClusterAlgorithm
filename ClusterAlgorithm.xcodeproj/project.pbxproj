@@ -17,7 +17,6 @@
 		842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72927BA7B070003C997 /* String+LocalizedError.swift */; };
 		842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72B27BA7B280003C997 /* Array+chunk.swift */; };
 		842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72D27BA7B420003C997 /* Array+atomDescription.swift */; };
-		842ED73027BA7B5B0003C997 /* String+initDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72F27BA7B5A0003C997 /* String+initDecimal.swift */; };
 		842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */; };
 		842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73327BA8E580003C997 /* DataPreparer.swift */; };
 		842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */; };
@@ -49,7 +48,6 @@
 		842ED72927BA7B070003C997 /* String+LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalizedError.swift"; sourceTree = "<group>"; };
 		842ED72B27BA7B280003C997 /* Array+chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+chunk.swift"; sourceTree = "<group>"; };
 		842ED72D27BA7B420003C997 /* Array+atomDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+atomDescription.swift"; sourceTree = "<group>"; };
-		842ED72F27BA7B5A0003C997 /* String+initDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+initDecimal.swift"; sourceTree = "<group>"; };
 		842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAMMPSSerializer.swift; sourceTree = "<group>"; };
 		842ED73327BA8E580003C997 /* DataPreparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPreparer.swift; sourceTree = "<group>"; };
 		842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereRadiusCalculator.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 		842ED72827BA7AF40003C997 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				842ED72F27BA7B5A0003C997 /* String+initDecimal.swift */,
 				842ED72927BA7B070003C997 /* String+LocalizedError.swift */,
 				842ED72B27BA7B280003C997 /* Array+chunk.swift */,
 				842ED72D27BA7B420003C997 /* Array+atomDescription.swift */,
@@ -221,7 +218,6 @@
 				841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */,
 				842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */,
 				841E956027BAF7D7003A1B36 /* InteratomDistanceCalculator.swift in Sources */,
-				842ED73027BA7B5B0003C997 /* String+initDecimal.swift in Sources */,
 				842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */,
 				841E957327BD1656003A1B36 /* ClusterStrategyProtocol.swift in Sources */,
 			);

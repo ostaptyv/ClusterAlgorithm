@@ -8,7 +8,7 @@
 import Foundation
 
 struct CubeAreaGenerator {
-    func generateCubeAreas(germaniumAtoms: [Atom], cubeAreaEdgeHalfLength: Decimal, atomDataChunked: Chunk3D<Atom>) -> [Atom: [Atom]] {
+    func generateCubeAreas(germaniumAtoms: [Atom], cubeAreaEdgeHalfLength: Double, atomDataChunked: Chunk3D<Atom>) -> [Atom: [Atom]] {
         var germaniumCubeAreas = [Atom: [Atom]]() // the key is a germanium atom, the value are atoms inside the cubic area associated with the given germanium atom
         let germaniumCount = germaniumAtoms.count
         

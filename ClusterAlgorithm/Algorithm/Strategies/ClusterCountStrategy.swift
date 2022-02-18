@@ -41,7 +41,7 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
         print("* General number of Ge atoms found: \(germaniumCount)")
         
         // Define sphere radius based on one germanium atom to use it further in the algorithm
-        var sphereAreaRadius: Decimal = 0.0
+        var sphereAreaRadius: Double = 0.0
         
         performOperation(title: "DEFINING SPHERE RADIUS") {
             let upperRadiusBound = atomDataChunked.last![0][0].z - atomDataChunked.first![0][0].z

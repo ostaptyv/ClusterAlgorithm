@@ -25,7 +25,7 @@ struct InteratomDistanceCalculator {
                 let distanceSquared =
                     xDifferenceSquared + yDifferenceSquared + zDifferenceSquared
                 
-                distances[sphereAreaAtom] = Double(truncating: distanceSquared as NSNumber).squareRoot()
+                distances[sphereAreaAtom] = sqrt(distanceSquared)
             }
             
             let sortedAtomsByAscendingDistances = distances

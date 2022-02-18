@@ -56,9 +56,9 @@ struct LAMMPSSerializer {
                 
                 let atomID = Int(atomStringSplitted[0])!
                 let atomType = Int(atomStringSplitted[1])!
-                let atomX = Decimal(Double(atomStringSplitted[2])!)
-                let atomY = Decimal(Double(atomStringSplitted[3])!)
-                let atomZ = Decimal(Double(atomStringSplitted[4])!)
+                let atomX = Double(atomStringSplitted[2])!
+                let atomY = Double(atomStringSplitted[3])!
+                let atomZ = Double(atomStringSplitted[4])!
                 
                 return Atom(id: atomID, type: atomType, x: atomX, y: atomY, z: atomZ, shouldBeConverted: false)
             }

@@ -8,10 +8,10 @@
 import Foundation
 
 struct SphereRadiusCalculator {
-    func defineSphereRadius(for germaniumCountInCluster: Int, atomDataSplitted: [Atom], upperRadiusBound: Decimal) -> Decimal {
-        var lowerRadiusBound: Decimal = 0.0
-        var upperRadiusBound: Decimal = upperRadiusBound
-        var sphereAreaRadius: Decimal
+    func defineSphereRadius(for germaniumCountInCluster: Int, atomDataSplitted: [Atom], upperRadiusBound: Double) -> Double {
+        var lowerRadiusBound: Double = 0.0
+        var upperRadiusBound: Double = upperRadiusBound
+        var sphereAreaRadius: Double
         var currentGermaniumCountDifference = 0
         var previousGermaniumCountDifference = 0
         

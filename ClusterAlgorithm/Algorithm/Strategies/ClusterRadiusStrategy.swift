@@ -16,7 +16,7 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
     private let atomsConverter = AtomsConverter()
     
     private var atomDataSplitted = [Atom]()
-    let clusterRadius: Decimal
+    let clusterRadius: Double
     var fileURL: URL?
         
     func execute() throws {
@@ -144,8 +144,8 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         print("\(hyphenDivider)- END \(title.uppercased()) -\(hyphenDivider)")
     }
     
-    init(clusterRadius: Decimal) throws {
-        guard !clusterRadius.isSignMinus else {
+    init(clusterRadius: Double) throws {
+        guard clusterRadius.sign == .plus else {
             throw "Error: You can't specify negative radius"
         }
         self.clusterRadius = clusterRadius
