@@ -8,47 +8,41 @@
 import Foundation
 
 struct CubeAreaGenerator {
-    func generateCubeAreas(germaniumAtoms: [Atom], cubeAreaEdgeHalfLength: Double, atomDataChunked: Chunk3D<Atom>) -> [Atom: [Atom]] {
-        var germaniumCubeAreas = [Atom: [Atom]]() // the key is a germanium atom, the value are atoms inside the cubic area associated with the given germanium atom
-        let germaniumCount = germaniumAtoms.count
+    func generateCubeAreas(around clusterCenters: [Atom], using atomDataChunked: Chunk3D<Atom>, cubeEdgeHalfLength: Double) -> [Atom: [Atom]] {
+        var cubeAreas = [Atom: [Atom]]() // the key is the central atom in a cluster, the value are the atoms inside the cubic area associated with the given cluster center
         
-        for (index, germaniumAtom) in germaniumAtoms.enumerated() {
+        for (clusterCenterIndexEnumerated, centralAtom) in clusterCenters.enumerated() {
             var cubeAreaAtoms = [Atom]()
             
             for zChunk in atomDataChunked {
                 let z = zChunk[0][0].z
-                let cubeZRange = (germaniumAtom.z - cubeAreaEdgeHalfLength...germaniumAtom.z + cubeAreaEdgeHalfLength)
+                let cubeZRange = (centralAtom.z - cubeEdgeHalfLength...centralAtom.z + cubeEdgeHalfLength)
                 if !cubeZRange.contains(z) {
                     continue
                 }
 
                 for yChunk in zChunk {
                     let y = yChunk[0].y
-                    let cubeYRange = (germaniumAtom.y - cubeAreaEdgeHalfLength...germaniumAtom.y + cubeAreaEdgeHalfLength)
+                    let cubeYRange = (centralAtom.y - cubeEdgeHalfLength...centralAtom.y + cubeEdgeHalfLength)
                     if !cubeYRange.contains(y) {
                         continue
                     }
 
                     for element in yChunk {
                         let x = element.x
-                        let cubeXRange = (germaniumAtom.x - cubeAreaEdgeHalfLength...germaniumAtom.x + cubeAreaEdgeHalfLength)
+                        let cubeXRange = (centralAtom.x - cubeEdgeHalfLength...centralAtom.x + cubeEdgeHalfLength)
                         
                         if cubeXRange.contains(x) {
                             cubeAreaAtoms.append(element)
-                            
-                            // For debug purposes only:
-//                            if germaniumAtom.id != element.id && layerLevels.contains(.cubeArea) {
-//                                atomDataSplitted[element.id].type = 3
-//                            }
                         }
                     }
                 }
             }
-            germaniumCubeAreas[germaniumAtom] = cubeAreaAtoms
+            cubeAreas[centralAtom] = cubeAreaAtoms
             
-            print("Germanium atoms: \(index + 1) out of \(germaniumCount); cube area count: \(germaniumCubeAreas.count)", terminator: "\n")
+            print("Germanium atoms: \(clusterCenterIndexEnumerated + 1) out of \(clusterCenters.count); cube area count: \(cubeAreas.count)", terminator: "\n")
         }
         
-        return germaniumCubeAreas
+        return cubeAreas
     }
 }

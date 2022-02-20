@@ -19,7 +19,7 @@ class ClusterAlgorithm {
     func createClusters(with metric: ClusterMetric) throws {
         switch metric {
         case .count(let germaniumCountInCluster):
-            strategy = try ClusterCountStrategy(germaniumCountInCluster: germaniumCountInCluster)
+            strategy = try ClusterCountStrategy(atomsInClusterCount: germaniumCountInCluster)
         case .radius(let clusterRadius):
             strategy = try ClusterRadiusStrategy(clusterRadius: clusterRadius)
         }

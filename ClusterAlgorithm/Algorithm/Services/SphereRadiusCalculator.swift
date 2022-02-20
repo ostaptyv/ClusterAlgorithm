@@ -8,10 +8,10 @@
 import Foundation
 
 struct SphereRadiusCalculator {
-    func defineSphereRadius(for germaniumCountInCluster: Int, atomDataSplitted: [Atom], upperRadiusBound: Double) -> Double {
+    func defineSphereRadius(forCount atomsInClusterCount: Int, in atomData: [Atom], limitingRadiusUpTo upperRadiusBound: Double) -> Double {
+        var sphereAreaRadius: Double
         var lowerRadiusBound: Double = 0.0
         var upperRadiusBound: Double = upperRadiusBound
-        var sphereAreaRadius: Double
         var currentGermaniumCountDifference = 0
         var previousGermaniumCountDifference = 0
         
@@ -21,13 +21,12 @@ struct SphereRadiusCalculator {
             print("Suggested sphere radius (upper): \(upperRadiusBound)", terminator: "\n")
             var atomsInSphereAreaCount = 0
             let middleRadius = ((upperRadiusBound - lowerRadiusBound) / 2) + lowerRadiusBound
-            // FIXME: FIXME: Imitate checking the central atom with coordinates (x: 0.0, y: 0.0, z: 0.0). This is made to prevent choosing germanium atom near the surface of the nanowire, because in that case radius maybe larger than it's needed. Type and ID values don't matter here
-            let germaniumAtom: Atom = .zero // atomDataSplitted[germaniumIndices.first!]
+            let centralAtom: Atom = .zero
             
-            for atomElement in atomDataSplitted {
-                let xSquared = pow(atomElement.x - germaniumAtom.x, 2)
-                let ySquared = pow(atomElement.y - germaniumAtom.y, 2)
-                let zSquared = pow(atomElement.z - germaniumAtom.z, 2)
+            for atom in atomData {
+                let xSquared = pow(atom.x - centralAtom.x, 2)
+                let ySquared = pow(atom.y - centralAtom.y, 2)
+                let zSquared = pow(atom.z - centralAtom.z, 2)
                 let radiusSquared = pow(middleRadius, 2)
                 
                 if xSquared + ySquared + zSquared <= radiusSquared {
@@ -35,7 +34,7 @@ struct SphereRadiusCalculator {
                 }
             }
             
-            currentGermaniumCountDifference = atomsInSphereAreaCount - germaniumCountInCluster
+            currentGermaniumCountDifference = atomsInSphereAreaCount - atomsInClusterCount
             if currentGermaniumCountDifference > 0 {
                 upperRadiusBound = middleRadius
             } else {

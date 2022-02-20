@@ -9,9 +9,9 @@ import Foundation
 
 struct LAMMPSSerializer {
     
-    func encode(from atomDataSplitted: [Atom], originalTextData: String) throws -> String {
+    func encode(from atomData: [Atom], originalTextData: String) throws -> String {
         // Prepare algorithm results to be written to the file
-        let textAtomData = atomDataSplitted.map { atom -> String in
+        let textAtomData = atomData.map { atom -> String in
             var resultStringArray = [String]()
 
             resultStringArray.append(String(atom.id)) 
@@ -41,11 +41,11 @@ struct LAMMPSSerializer {
             throw "Error: \(error)"
         }
         
-        // Cut off all floating point number up to 3 decimal places
-        let cutOffRegex = #"([0-9-]+\.[0-9]{1,3})[0-9]*"#
-        atomTextData = atomTextData.replacingOccurrences(of: cutOffRegex,
-                                                         with: "$1",
-                                                         options: .regularExpression)
+//        // Cut off all floating point number up to 3 decimal places
+//        let cutOffRegex = #"([0-9-]+\.[0-9]{1,3})[0-9]*"#
+//        atomTextData = atomTextData.replacingOccurrences(of: cutOffRegex,
+//                                                         with: "$1",
+//                                                         options: .regularExpression)
         
         let atomDataSplitted = atomTextData.components(separatedBy: "\n")
             .map { atomString -> Atom? in
@@ -54,13 +54,17 @@ struct LAMMPSSerializer {
                 }
                 let atomStringSplitted = atomString.split(separator: " ")
                 
-                let atomID = Int(atomStringSplitted[0])!
-                let atomType = Int(atomStringSplitted[1])!
-                let atomX = Double(atomStringSplitted[2])!
-                let atomY = Double(atomStringSplitted[3])!
-                let atomZ = Double(atomStringSplitted[4])!
+                let id = Int(atomStringSplitted[0])!
+                let type = Int(atomStringSplitted[1])!
+                let x = Double(atomStringSplitted[2])!
+                let y = Double(atomStringSplitted[3])!
+                let z = Double(atomStringSplitted[4])!
                 
-                return Atom(id: atomID, type: atomType, x: atomX, y: atomY, z: atomZ, shouldBeConverted: false)
+                return Atom(id: id,
+                            type: type,
+                            x: x,
+                            y: y,
+                            z: z)
             }
             .compactMap { $0 }
         
@@ -72,7 +76,7 @@ struct LAMMPSSerializer {
         let optionalStartIndex = dataString.range(of: start)?.upperBound
         
         guard let startIndex = optionalStartIndex else {
-            throw "Given start string not found in data file"
+            throw "Error: Given start string not found in the data file"
         }
         
         let optionalEndIndex = dataString.range(of: end,
@@ -80,7 +84,7 @@ struct LAMMPSSerializer {
             .lowerBound
         
         guard let endIndex = optionalEndIndex else {
-            throw "Given start and/or end string not found in data file"
+            throw "Error: Given end string not found in the data file"
         }
         
         return startIndex...endIndex

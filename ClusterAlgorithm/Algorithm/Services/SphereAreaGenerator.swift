@@ -8,35 +8,29 @@
 import Foundation
 
 struct SphereAreaGenerator {
-    func generateSphereAreas(germaniumCubeAreas: [Atom: [Atom]], sphereAreaRadius: Double) -> [Atom: [Atom]] {
-        var germaniumSphereAreas = [Atom: [Atom]]() // the key is a germanium atom, the value are atoms inside the spheric area associated with the given germanium atom
+    func generateSphereAreas(insideOf cubeAreas: [Atom: [Atom]], withRadius sphereAreaRadius: Double) -> [Atom: [Atom]] {
+        var sphereAreas = [Atom: [Atom]]() // the key is the central atom in a cluster, the value are atoms inside the spheric area associated with the given cluster center
  
-        let germaniumAtoms = [Atom](germaniumCubeAreas.keys)
-        let germaniumCount = germaniumAtoms.count
+        let clusterCenters = [Atom](cubeAreas.keys)
         
-        for (index, germaniumAtom) in germaniumAtoms.enumerated() {
+        for (clusterCenterIndexEnumerated, centralAtom) in clusterCenters.enumerated() {
             var sphereAreaAtoms = [Atom]()
             
-            for atomElement in germaniumCubeAreas[germaniumAtom]! {
-                let xSquared = pow(atomElement.x - germaniumAtom.x, 2)
-                let ySquared = pow(atomElement.y - germaniumAtom.y, 2)
-                let zSquared = pow(atomElement.z - germaniumAtom.z, 2)
+            for atom in cubeAreas[centralAtom]! {
+                let xSquared = pow(atom.x - centralAtom.x, 2)
+                let ySquared = pow(atom.y - centralAtom.y, 2)
+                let zSquared = pow(atom.z - centralAtom.z, 2)
                 let radiusSquared = pow(sphereAreaRadius, 2)
 
                 if xSquared + ySquared + zSquared <= radiusSquared {
-                    sphereAreaAtoms.append(atomElement)
+                    sphereAreaAtoms.append(atom)
                 }
             }
-            germaniumSphereAreas[germaniumAtom] = sphereAreaAtoms
+            sphereAreas[centralAtom] = sphereAreaAtoms
             
-            print("Germanium atoms: \(index + 1) out of \(germaniumCount); sphere area count: \(germaniumSphereAreas.count)", terminator: "\n")
+            print("Germanium atoms: \(clusterCenterIndexEnumerated + 1) out of \(clusterCenters.count); sphere area count: \(sphereAreas.count)", terminator: "\n")
         }
         
-//        // For debug purposes only:
-//        if layerLevels.contains(.sphereArea) {
-//            atomDataSplitted[sphereAreaIndex].type = 4
-//        }
-        
-        return germaniumSphereAreas
+        return sphereAreas
     }
 }

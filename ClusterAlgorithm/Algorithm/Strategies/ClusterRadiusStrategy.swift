@@ -15,13 +15,12 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
     private let sphereAreaGenerator = SphereAreaGenerator()
     private let atomsConverter = AtomsConverter()
     
-    private var atomDataSplitted = [Atom]()
     let clusterRadius: Double
     var fileURL: URL?
         
     func execute() throws {
         guard let unwrappedFileUrl = fileURL else {
-            throw "File URL wasn't specified before executing a strategy"
+            throw "Error: File URL wasn't specified before executing a strategy."
         }
         guard !clusterRadius.isZero else {
             return
@@ -30,60 +29,58 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         // Read data from file
         let fileTextData = try readData(from: unwrappedFileUrl)
         
-        let rawAtomDataSplitted = try lammpsSerializer.decode(from: fileTextData)
-        atomDataSplitted = dataPreparer.prepareRawData(rawAtomDataSplitted)
-        let atomDataChunked = dataPreparer.chunkAtomData(atomDataSplitted)
-        let germaniumIndices = germaniumIndices(in: atomDataSplitted)
+        let rawAtomData = try lammpsSerializer.decode(from: fileTextData)
+        var atomData = prepareRawData(rawAtomData)
+        let atomDataChunked = dataPreparer.chunkAtomData(atomData)
+        let clusterCenters = clusterCenters(in: atomData)
+        let clusterCentersCount = clusterCenters.count
         
-        let germaniumCount = germaniumIndices.count
-        print("* General number of Ge atoms found: \(germaniumCount)")
+        print("* General number of Ge atoms found: \(clusterCentersCount)")
         
         // Create cubic areas around germanium atoms
-        var germaniumCubeAreas = [Atom: [Atom]]()
+        var cubeAreas = [Atom: [Atom]]()
         
         performOperation(title: "GENERATING CUBE AREAS") {
-            let germaniumAtoms = atomDataSplitted.filter { atom in
-                return atom.type == 2
-            }
-            
-            germaniumCubeAreas = cubeAreaGenerator
-                .generateCubeAreas(germaniumAtoms: germaniumAtoms,
-                                   cubeAreaEdgeHalfLength: clusterRadius,
-                                   atomDataChunked: atomDataChunked)
+            cubeAreas = cubeAreaGenerator
+                .generateCubeAreas(around: clusterCenters,
+                                   using: atomDataChunked,
+                                   cubeEdgeHalfLength: clusterRadius)
         }
         
         // Create sphere areas around germanium atoms
-        var germaniumSphereAreas = [Atom: [Atom]]()
+        var sphereAreas = [Atom: [Atom]]()
         
         performOperation(title: "GENERATING SPHERE AREAS") {
-            germaniumSphereAreas = sphereAreaGenerator
-                .generateSphereAreas(germaniumCubeAreas: germaniumCubeAreas,
-                                     sphereAreaRadius: clusterRadius)
+            sphereAreas = sphereAreaGenerator
+                .generateSphereAreas(insideOf: cubeAreas, withRadius: clusterRadius)
         }
         
+        // Convert atoms to Germanium ones
         var atomsToConvertCount = 0
         
-        // Convert atoms to Germanium ones
         performOperation(title: "CONVERTING FINAL ATOMS") {
-            let atomIndicesToConvert = germaniumSphereAreas
-                .flatMap { (_, atomsToConvert) in
-                    return atomsToConvert
+            let atomIndicesToConvert = sphereAreas
+                .flatMap { (_, sphereAreaAtoms) in
+                    return sphereAreaAtoms
                 }
                 .map { atom in
                     return atom.id
                 }
             atomsToConvertCount = atomIndicesToConvert.count
             
-            atomsConverter.convertAtoms(at: atomIndicesToConvert, in: &atomDataSplitted)
+            atomsConverter.convertAtoms(atPositions: atomIndicesToConvert,
+                                        in: &atomData)
         }
         
         // Final statistics
-        let germaniumCountAfterConverting = atomsToConvertCount + germaniumCount // atomToConvert includes Si atoms which was then converted to Ge atoms so we need to add the germanium atoms which, in fact, are "centers" of the resulting clusters
-        logConvertingStatistics(before: germaniumCount, after: germaniumCountAfterConverting)
+        let germaniumCountAfterConverting = atomsToConvertCount + clusterCentersCount // atomToConvert includes Si atoms which were then converted to Ge atoms so we need to add the germanium atoms which, in fact, are "centers" of the resulting clusters
+        logConvertingStatistics(before: clusterCentersCount,
+                                after: germaniumCountAfterConverting,
+                                generalCount: atomData.count)
+                
+        let atomDataIDsOneBased = dataPreparer.shiftIDsToBaseOne(in: atomData)
         
-        dataPreparer.makeOneBasedAtomIDs(in: &atomDataSplitted)
-        
-        let resultTextData = try lammpsSerializer.encode(from: atomDataSplitted, originalTextData: fileTextData)
+        let resultTextData = try lammpsSerializer.encode(from: atomDataIDsOneBased, originalTextData: fileTextData)
         
         // Write data to the original file
         try writeData(resultTextData, to: unwrappedFileUrl)
@@ -103,6 +100,14 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         return fileTextData
     }
     
+    private func prepareRawData(_ rawData: [Atom]) -> [Atom] {
+        // Convert string data to numbers to be able to do mathematical operations on them
+        let atomDataSorted = dataPreparer.sortAtomDataInIncreasingOrder(rawData)
+        let atomDataIDReassigned = dataPreparer.reassignIDsToIndices(of: atomDataSorted)
+        
+        return atomDataIDReassigned
+    }
+    
     private func writeData(_ resultTextData: String, to url: URL) throws {
         do {
             try resultTextData.write(to: url, atomically: true, encoding: .utf8)
@@ -111,19 +116,14 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         }
     }
     
-    private func germaniumIndices(in atomDataSplitted: [Atom]) -> [Int] {
-        var germaniumIndices = [Int]()
-        for (index, element) in atomDataSplitted.enumerated() {
-            if element.type == 2 {
-                germaniumIndices.append(index)
-            }
+    private func clusterCenters(in atomData: [Atom]) -> [Atom] {
+        return atomData.filter { atom in
+            return atom.type == 2
         }
-        
-        return germaniumIndices
     }
     
-    private func logConvertingStatistics(before germaniumCountBeforeConverting: Int, after germaniumCountAfterConverting: Int) {
-        print("\nGeneral atoms count: \(atomDataSplitted.count)")
+    private func logConvertingStatistics(before germaniumCountBeforeConverting: Int, after germaniumCountAfterConverting: Int, generalCount atomDataCount: Int) {
+        print("\nGeneral atoms count: \(atomDataCount)")
         print("Germanium atoms count before generating the cluster: \(germaniumCountBeforeConverting)")
         print("Germanium atoms count after generating the cluster: \(germaniumCountAfterConverting)")
     }

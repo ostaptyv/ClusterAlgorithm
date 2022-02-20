@@ -11,40 +11,40 @@ struct AtomsConverter {
     var cubeAreaIndices: [Int]?
     var sphereAreaIndices: [Int]?
     
-    func convertAtoms(at atomIndicesToConvert: [Int], in atomDataSplitted: inout [Atom]) {
-        let allAtomsCount = atomDataSplitted.count
+    func convertAtoms(atPositions atomIndicesToConvert: [Int], in atomData: inout [Atom]) {
+        let allAtomsCount = atomData.count
         
         if layerLevels.contains(.cubeArea) {
-            createCubeDebugData(in: &atomDataSplitted)
+            createCubeDebugData(in: &atomData)
         }
         if layerLevels.contains(.sphereArea) {
-            createSphereDebugData(in: &atomDataSplitted)
+            createSphereDebugData(in: &atomData)
         }
         
         for (index, atomToConvertIndex) in atomIndicesToConvert.enumerated() {
             if layerLevels.contains(.cluster) {
                 // For debug purposes only:
-                atomDataSplitted[atomToConvertIndex].type = 5
+                atomData[atomToConvertIndex].type = 5
             } else {
-                atomDataSplitted[atomToConvertIndex].type = 2
+                atomData[atomToConvertIndex].type = 2
             }
             
             print("Atoms passed: \(index) out of \(allAtomsCount)")
         }
     }
     
-    private func createCubeDebugData(in atomDataSplitted: inout [Atom]) {
+    private func createCubeDebugData(in atomData: inout [Atom]) {
         if let unwrappedCubeAreaIndices = cubeAreaIndices {
             for cubeAreaIndex in unwrappedCubeAreaIndices {
-                atomDataSplitted[cubeAreaIndex].type = 3
+                atomData[cubeAreaIndex].type = 3
             }
         }
     }
-    private func createSphereDebugData(in atomDataSplitted: inout [Atom]) {
+    private func createSphereDebugData(in atomData: inout [Atom]) {
         
         if let unwrappedSphereAreaIndices = sphereAreaIndices {
             for sphereAreaIndex in unwrappedSphereAreaIndices {
-                atomDataSplitted[sphereAreaIndex].type = 4
+                atomData[sphereAreaIndex].type = 4
             }
         }
     }
