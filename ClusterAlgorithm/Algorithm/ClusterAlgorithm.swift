@@ -14,7 +14,18 @@ enum ClusterMetric {
 
 class ClusterAlgorithm {
     private var strategy: ClusterStrategyProtocol!
-    let fileURL: URL
+    
+    /// The file name with file extension being processed by this strategy.
+    ///
+    /// The property should not contain any other paths, schemes, arguments, etc.
+    ///
+    /// For example:
+    ///
+    ///     let strategy = YourStrategy()
+    ///     strategy.fileNameURL = URL(string: "my_file.txt")!
+    ///
+    /// - Returns: `URL` instance containing a file name and its extension, and `nil` if the value wasn't set.
+    let fileNameURL: URL
     
     func createClusters(with metric: ClusterMetric) throws {
         switch metric {
@@ -24,11 +35,15 @@ class ClusterAlgorithm {
             strategy = try ClusterRadiusStrategy(clusterRadius: clusterRadius)
         }
         
-        strategy.fileURL = fileURL
+        strategy.fileNameURL = fileNameURL
         try strategy.execute()
     }
     
-    init(fileURL: URL) {
-        self.fileURL = fileURL
+    /// Creates a new instance of the cluster algorithm.
+    ///
+    ///  - Parameters:
+    ///     - fileNameURL: A `URL` instance containing a file name and its extension.
+    init(fileNameURL: URL) {
+        self.fileNameURL = fileNameURL
     }
 }

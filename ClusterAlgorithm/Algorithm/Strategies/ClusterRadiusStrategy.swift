@@ -9,6 +9,7 @@ import Foundation
 
 class ClusterRadiusStrategy: ClusterStrategyProtocol {
     
+    private var fileRepository: RepositoryProtocol!
     private let lammpsSerializer = LAMMPSSerializer()
     private let dataPreparer = DataPreparer()
     private let cubeAreaGenerator = CubeAreaGenerator()
@@ -16,10 +17,14 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
     private let atomsConverter = AtomsConverter()
     
     let clusterRadius: Double
-    var fileURL: URL?
+    var fileNameURL: URL? {
+        willSet {
+            setRepository(with: newValue)
+        }
+    }
         
     func execute() throws {
-        guard let unwrappedFileUrl = fileURL else {
+        guard fileNameURL != nil else {
             throw "Error: File URL wasn't specified before executing a strategy."
         }
         guard !clusterRadius.isZero else {
@@ -27,7 +32,10 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         }
         
         // Read data from file
-        let fileTextData = try readData(from: unwrappedFileUrl)
+        let fileData = try fileRepository.readData()
+        guard let fileTextData = String(data: fileData, encoding: .utf8) else {
+            throw "Error: file data is corrupted or not compatible with UTF8"
+        }
         
         let rawAtomData = try lammpsSerializer.decode(from: fileTextData)
         var atomData = prepareRawData(rawAtomData)
@@ -77,27 +85,24 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         logConvertingStatistics(before: clusterCentersCount,
                                 after: germaniumCountAfterConverting,
                                 generalCount: atomData.count)
-                
-        let atomDataIDsOneBased = dataPreparer.shiftIDsToBaseOne(in: atomData)
-        
-        let resultTextData = try lammpsSerializer.encode(from: atomDataIDsOneBased, originalTextData: fileTextData)
         
         // Write data to the original file
-        try writeData(resultTextData, to: unwrappedFileUrl)
+        let atomDataIDsOneBased = dataPreparer.shiftIDsToBaseOne(in: atomData)
+        let resultTextData = try lammpsSerializer.encode(from: atomDataIDsOneBased, originalTextData: fileTextData)
+        guard let resultData = resultTextData.data(using: .utf8) else {
+            throw "Result of the algorithm can't be converted to buffer of bytes without losing some information (see: https://developer.apple.com/documentation/foundation/nsstring/1413692-data)"
+        }
+        
+        try fileRepository.writeData(resultData)
     }
     
     // MARK: - Private methods
     
-    private func readData(from url: URL) throws -> String {
-        var fileTextData = ""
-        
-        do {
-            fileTextData = try String(contentsOf: url, encoding: .utf8)
-        } catch {
-            throw "Error when reading text data file: \(error)"
+    private func setRepository(with fileNameURL: URL?) {
+        guard let fileNameURL = fileNameURL else {
+            return
         }
-        
-        return fileTextData
+        fileRepository = FileRepository(fileName: fileNameURL.path)
     }
     
     private func prepareRawData(_ rawData: [Atom]) -> [Atom] {
@@ -106,14 +111,6 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         let atomDataIDReassigned = dataPreparer.reassignIDsToIndices(of: atomDataSorted)
         
         return atomDataIDReassigned
-    }
-    
-    private func writeData(_ resultTextData: String, to url: URL) throws {
-        do {
-            try resultTextData.write(to: url, atomically: true, encoding: .utf8)
-        } catch {
-            throw "Error when writing to text data file: \(error)"
-        }
     }
     
     private func clusterCenters(in atomData: [Atom]) -> [Atom] {

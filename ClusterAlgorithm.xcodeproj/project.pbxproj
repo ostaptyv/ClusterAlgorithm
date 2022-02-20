@@ -13,6 +13,8 @@
 		841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */; };
 		841E957327BD1656003A1B36 /* ClusterStrategyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */; };
 		841E958327BD5ECD003A1B36 /* ClusterRadiusStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E958227BD5ECD003A1B36 /* ClusterRadiusStrategy.swift */; };
+		842CCAF727C2DDED006B4135 /* FileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CCAF627C2DDED006B4135 /* FileRepository.swift */; };
+		842CCAFB27C2DE51006B4135 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CCAFA27C2DE51006B4135 /* RepositoryProtocol.swift */; };
 		842ED72627BA709E0003C997 /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72527BA709E0003C997 /* Atom.swift */; };
 		842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72927BA7B070003C997 /* String+LocalizedError.swift */; };
 		842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED72B27BA7B280003C997 /* Array+chunk.swift */; };
@@ -44,6 +46,8 @@
 		841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterAlgorithm.swift; sourceTree = "<group>"; };
 		841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterStrategyProtocol.swift; sourceTree = "<group>"; };
 		841E958227BD5ECD003A1B36 /* ClusterRadiusStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterRadiusStrategy.swift; sourceTree = "<group>"; };
+		842CCAF627C2DDED006B4135 /* FileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepository.swift; sourceTree = "<group>"; };
+		842CCAFA27C2DE51006B4135 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
 		842ED72527BA709E0003C997 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
 		842ED72927BA7B070003C997 /* String+LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalizedError.swift"; sourceTree = "<group>"; };
 		842ED72B27BA7B280003C997 /* Array+chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+chunk.swift"; sourceTree = "<group>"; };
@@ -71,7 +75,6 @@
 		841E957427BD1A13003A1B36 /* Strategies */ = {
 			isa = PBXGroup;
 			children = (
-				841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */,
 				846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */,
 				841E958227BD5ECD003A1B36 /* ClusterRadiusStrategy.swift */,
 			);
@@ -81,6 +84,7 @@
 		841E957527BD1A27003A1B36 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				842CCAF627C2DDED006B4135 /* FileRepository.swift */,
 				842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */,
 				842ED73327BA8E580003C997 /* DataPreparer.swift */,
 				842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */,
@@ -90,6 +94,15 @@
 				841E956127BC6E29003A1B36 /* AtomsConverter.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		842CCAF927C2DE3C006B4135 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				841E957227BD1656003A1B36 /* ClusterStrategyProtocol.swift */,
+				842CCAFA27C2DE51006B4135 /* RepositoryProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		842ED72427BA708E0003C997 /* Model */ = {
@@ -141,6 +154,7 @@
 			children = (
 				846C7A1E264356CB00E04A83 /* main.swift */,
 				842ED72827BA7AF40003C997 /* Extensions */,
+				842CCAF927C2DE3C006B4135 /* Protocols */,
 				842ED72427BA708E0003C997 /* Model */,
 				842ED72727BA7AB20003C997 /* Algorithm */,
 			);
@@ -216,10 +230,12 @@
 				841E955E27BAE5CB003A1B36 /* SphereAreaGenerator.swift in Sources */,
 				846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */,
 				841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */,
+				842CCAF727C2DDED006B4135 /* FileRepository.swift in Sources */,
 				842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */,
 				841E956027BAF7D7003A1B36 /* InteratomDistanceCalculator.swift in Sources */,
 				842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */,
 				841E957327BD1656003A1B36 /* ClusterStrategyProtocol.swift in Sources */,
+				842CCAFB27C2DE51006B4135 /* RepositoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

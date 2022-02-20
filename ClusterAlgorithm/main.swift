@@ -20,19 +20,14 @@ struct LayerLevel: OptionSet {
 // For debug purposes only:
 let layerLevels: LayerLevel = []//[.cubeArea, .sphereArea, .cluster]
 
-if let fileURL = URL(string: "file:///Users/admin/Documents/Diploma/XcodeProjects/ClusterAlgoritrhm/" + fileName) {
-    do {
-        print("*** \(fileName) ***")
-        
-        let clusterAlgorithm = ClusterAlgorithm(fileURL: fileURL)
-        try clusterAlgorithm.createClusters(with: .radius(25.807432))// + 1.4))
-        
-        print("✅ Operation successful.")
-    } catch {
-        print("⛔️ " + error.localizedDescription)
-        print("Operation aborted.")
-    }
-} else {
-    print("⛔️ Error when retrieving current directory URL.")
+do {
+    print("*** \(fileName) ***")
+    
+    let clusterAlgorithm = ClusterAlgorithm(fileNameURL: URL(string: fileName)!)
+    try clusterAlgorithm.createClusters(with: .radius(25.807432))// + 1.4))
+    
+    print("✅ Operation successful.")
+} catch {
+    print("⛔️ " + error.localizedDescription)
     print("Operation aborted.")
 }
