@@ -10,6 +10,7 @@ import Foundation
 protocol RepositoryProtocol {
     func readData() throws -> Data
     func writeData(_ data: Data) throws
+    func copyDataToResults() throws
     
     /// Creates a new instance of the repository.
     ///

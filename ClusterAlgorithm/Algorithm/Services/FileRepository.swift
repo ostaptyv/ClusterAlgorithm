@@ -52,6 +52,15 @@ struct FileRepository: RepositoryProtocol {
         
         try writeData(data, atPath: writePath)
     }
+    func copyDataToResults() throws {
+        do {
+            try fileManager.copyItem(at: readURL, to: writeURL)
+        } catch CocoaError.fileWriteFileExists {
+            try copyDataReplacingExisting()
+        } catch {
+            throw "Error when copying a file into \"\(urlManager.resultsPath)\" (couldn't recover): \(error)"
+        }
+    }
     
     // MARK: - Private methods
     
@@ -70,6 +79,15 @@ struct FileRepository: RepositoryProtocol {
         let isSuccess = fileManager.createFile(atPath: writePath, contents: data)
         guard isSuccess else {
             throw "Error when writing a file"
+        }
+    }
+    
+    private func copyDataReplacingExisting() throws {
+        do {
+            try fileManager.removeItem(at: writeURL)
+            try fileManager.copyItem(at: readURL, to: writeURL)
+        } catch {
+            throw "Error when copying a file into \"\(urlManager.resultsPath)\" (replacing an existing file with the new one both of which share the same name): \(error)"
         }
     }
     
