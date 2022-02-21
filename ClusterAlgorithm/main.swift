@@ -7,7 +7,7 @@
 
 import Foundation
 
-fileprivate let fileName = "Ge100-1.data"
+fileprivate let fileName = "Ge0,5-10-1.data"
 
 struct LayerLevel: OptionSet {
     let rawValue: Int
@@ -20,13 +20,39 @@ struct LayerLevel: OptionSet {
 // For debug purposes only:
 let layerLevels: LayerLevel = []//[.cubeArea, .sphereArea, .cluster]
 
+
+//do {
+//    print("*** \(fileName) ***")
+//
+//    let clusterAlgorithm = ClusterAlgorithm(fileNameURL: URL(string: fileName)!)
+//    try clusterAlgorithm.createClusters(with: .count(10))
+//
+//    print("✅ Operation successful.")
+//} catch {
+//    print("⛔️ " + error.localizedDescription)
+//    print("Operation aborted.")
+//}
+
+
+//do {
+//    let runner = try MultipleRunner(germaniumPercentage: 0.5,
+//                                    nanowireVariationsCount: 2,
+//                                    nanowireLength: .full,
+//                                    isLogVerbose: true)
+//
+//    try runner.run(with: [1], deltaPrecision: 0.002)
+//} catch {
+//    print("⛔️ " + error.localizedDescription)
+//    print("Operation aborted.")
+//}
+
 do {
-    print("*** \(fileName) ***")
+    let runner = try MultipleRunner(germaniumPercentage: 0.1,
+                                    nanowireVariationsCount: 1,
+                                    nanowireLength: .phononAnalysis,
+                                    isLogVerbose: true)
     
-    let clusterAlgorithm = ClusterAlgorithm(fileNameURL: URL(string: fileName)!)
-    try clusterAlgorithm.createClusters(with: .radius(25.807432))// + 1.4))
-    
-    print("✅ Operation successful.")
+    try runner.run(with: [1, 10, 50, 100, 500], deltaPrecision: 0.002)
 } catch {
     print("⛔️ " + error.localizedDescription)
     print("Operation aborted.")

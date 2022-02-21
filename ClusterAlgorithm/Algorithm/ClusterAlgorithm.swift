@@ -27,7 +27,9 @@ class ClusterAlgorithm {
     /// - Returns: `URL` instance containing a file name and its extension, and `nil` if the value wasn't set.
     let fileNameURL: URL
     
-    func createClusters(with metric: ClusterMetric) throws {
+    // FIXME: FIXME: Temporary; should be replaced with better architecture solution
+    @discardableResult
+    func createClusters(with metric: ClusterMetric) throws -> ConvertingStatistics {
         switch metric {
         case .count(let germaniumCountInCluster):
             strategy = try ClusterCountStrategy(atomsInClusterCount: germaniumCountInCluster)
@@ -36,7 +38,9 @@ class ClusterAlgorithm {
         }
         
         strategy.fileNameURL = fileNameURL
-        try strategy.execute()
+        
+        // FIXME: FIXME: Temporary; should be replaced with better architecture solution
+        return try strategy.execute()
     }
     
     /// Creates a new instance of the cluster algorithm.

@@ -1,0 +1,80 @@
+######################################################################
+# ------------------------ VARIABLES ----------------------
+######################################################################
+variable          seed getenv xcode_ClusterAlgorithm_seed
+variable          nL equal  90    
+variable          aSi equal 5.432 
+variable          R_nw equal v_aSi*5
+variable          L_nw getenv xcode_ClusterAlgorithm_nanowireLength #v_aSi*v_nL
+variable          xGe getenv xcode_ClusterAlgorithm_percentageOfCenters
+
+variable          Temperature equal   300 
+variable          dt equal 0.5e-3
+variable          Tdamp equal 100*v_dt 
+variable          Pdamp equal 1000*v_dt
+
+variable          Nequilibr equal 500000
+
+variable          writeFilePath getenv xcode_ClusterAlgorithm_writeFilePath
+
+######################################################################
+# ----------------------- GEOMETRY -----------------------
+######################################################################
+units             metal
+dimension         3
+boundary          s s p
+
+variable          xlo equal  -v_R_nw
+variable          xhi equal   v_R_nw
+variable          ylo equal  -v_R_nw
+variable          yhi equal   v_R_nw
+variable          zlo equal  -v_L_nw/2
+variable          zhi equal   v_L_nw/2
+
+variable          xloNW equal  -v_R_nw
+variable          xhiNW equal   v_R_nw
+variable          yloNW equal  -v_R_nw
+variable          yhiNW equal   v_R_nw
+variable          zloNW equal  -v_L_nw/2
+variable          zhiNW equal   v_L_nw/2
+
+lattice custom    ${aSi}     &
+        a1      1.0      0.0     0.0     &
+        a2      0.0      1.0     0.0     &
+        a3      0.0      0.0     1.0     &
+        basis   0.0      0.0     0.0     &
+        basis   0.0      0.5     0.5     &    
+        basis   0.25     0.25    0.25    &  
+        basis   0.25     0.75    0.75    & 
+        basis   0.5      0.0     0.5     &   
+        basis   0.5      0.5     0.0     &   
+        basis   0.75     0.25    0.75    &                                   
+        basis   0.75     0.75    0.25    &
+
+region            NanoWire cylinder z 0.0 0.0  ${R_nw} ${zloNW} ${zhiNW} units box
+region            Box block ${xlo} ${xhi} ${ylo} ${yhi} ${zlo} ${zhi} units box
+create_box        2 Box
+create_atoms      1 region NanoWire
+set               type 1 type/fraction 2 ${xGe}  ${seed}
+mass              1 28.0855
+mass              2 72.63
+
+######################################################################
+# ------------------------ FORCE FIELDS -----------------------
+######################################################################
+pair_style        tersoff 
+pair_coeff        * * SiCGe.tersoff Si(D) Ge
+
+######################################################################
+#---------------------------SETTINGS----------------------------
+######################################################################
+neighbor          2.0   bin
+neigh_modify      check  yes
+timestep          ${dt}
+thermo            1000
+
+######################################################################
+#-----------------------EQUILIBRATION----------------------------
+######################################################################
+write_data        ${writeFilePath}#writeFilePath#Source/Ge10-0,2-1.data
+

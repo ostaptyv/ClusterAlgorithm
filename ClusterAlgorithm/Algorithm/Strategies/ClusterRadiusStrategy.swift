@@ -22,13 +22,11 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
             setRepository(with: newValue)
         }
     }
-        
-    func execute() throws {
+     
+    // FIXME: FIXME: Temporary; should be replaced with better architecture solution
+    func execute() throws -> ConvertingStatistics {
         guard fileNameURL != nil else {
             throw "Error: File URL wasn't specified before executing a strategy."
-        }
-        guard !clusterRadius.isZero else {
-            return
         }
         
         // Read data from file
@@ -43,7 +41,15 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         let clusterCenters = clusterCenters(in: atomData)
         let clusterCentersCount = clusterCenters.count
         
-        print("* General number of Ge atoms found: \(clusterCentersCount)")
+        // print("* General number of Ge atoms found: \(clusterCentersCount)")
+        
+        // FIXME: FIXME: Temporary; should be replaced with better architecture solution
+        guard !clusterRadius.isZero else {
+            try fileRepository.copyDataToResults()
+            return ConvertingStatistics(clusterAtomsCountBefore: clusterCentersCount,
+                                        clusterAtomsCountAfter: clusterCentersCount,
+                                        atomsCountGeneral: atomData.count)
+        }
         
         // Create cubic areas around germanium atoms
         var cubeAreas = [Atom: [Atom]]()
@@ -81,7 +87,7 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         }
         
         // Final statistics
-        let germaniumCountAfterConverting = atomsToConvertCount + clusterCentersCount // atomToConvert includes Si atoms which were then converted to Ge atoms so we need to add the germanium atoms which, in fact, are "centers" of the resulting clusters
+        let germaniumCountAfterConverting = atomsToConvertCount
         logConvertingStatistics(before: clusterCentersCount,
                                 after: germaniumCountAfterConverting,
                                 generalCount: atomData.count)
@@ -94,6 +100,11 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         }
         
         try fileRepository.writeData(resultData)
+        
+        // FIXME: FIXME: Temporary; should be replaced with better architecture solution
+        return ConvertingStatistics(clusterAtomsCountBefore: clusterCentersCount,
+                                    clusterAtomsCountAfter: germaniumCountAfterConverting,
+                                    atomsCountGeneral: atomData.count)
     }
     
     // MARK: - Private methods
@@ -120,9 +131,9 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
     }
     
     private func logConvertingStatistics(before germaniumCountBeforeConverting: Int, after germaniumCountAfterConverting: Int, generalCount atomDataCount: Int) {
-        print("\nGeneral atoms count: \(atomDataCount)")
-        print("Germanium atoms count before generating the cluster: \(germaniumCountBeforeConverting)")
-        print("Germanium atoms count after generating the cluster: \(germaniumCountAfterConverting)")
+        // print("\nGeneral atoms count: \(atomDataCount)")
+        // print("Germanium atoms count before generating the cluster: \(germaniumCountBeforeConverting)")
+        // print("Germanium atoms count after generating the cluster: \(germaniumCountAfterConverting)")
     }
     
     private func performOperation(title: String, closure: () -> Void) {
@@ -136,9 +147,9 @@ class ClusterRadiusStrategy: ClusterStrategyProtocol {
         
         let hyphenDivider = String(repeating: "-", count: hyphenCount)
         
-        print("\n\(hyphenDivider) START \(title.uppercased()) \(hyphenDivider)")
+        // print("\n\(hyphenDivider) START \(title.uppercased()) \(hyphenDivider)")
         closure()
-        print("\(hyphenDivider)- END \(title.uppercased()) -\(hyphenDivider)")
+        // print("\(hyphenDivider)- END \(title.uppercased()) -\(hyphenDivider)")
     }
     
     init(clusterRadius: Double) throws {

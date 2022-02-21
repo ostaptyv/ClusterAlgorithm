@@ -20,5 +20,6 @@ protocol ClusterStrategyProtocol {
     /// - Returns: `URL` instance containing a file name and its extension, and `nil` if the value wasn't set.
     var fileNameURL: URL? { get set }
     
-    func execute() throws
+    // FIXME: FIXME: Temporary; should be replaced with better architecture solution
+    func execute() throws -> ConvertingStatistics
 }

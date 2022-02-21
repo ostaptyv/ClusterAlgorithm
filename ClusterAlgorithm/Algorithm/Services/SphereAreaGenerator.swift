@@ -28,7 +28,7 @@ struct SphereAreaGenerator {
             }
             sphereAreas[centralAtom] = sphereAreaAtoms
             
-            print("Germanium atoms: \(clusterCenterIndexEnumerated + 1) out of \(clusterCenters.count); sphere area count: \(sphereAreas.count)", terminator: "\n")
+            // print("Germanium atoms: \(clusterCenterIndexEnumerated + 1) out of \(clusterCenters.count); sphere area count: \(sphereAreas.count)", terminator: "\n")
         }
         
         return sphereAreas

@@ -33,6 +33,9 @@ struct CubeAreaGenerator {
                         let cubeXRange = (centralAtom.x - cubeEdgeHalfLength...centralAtom.x + cubeEdgeHalfLength)
                         
                         if cubeXRange.contains(x) {
+                            if centralAtom.id == element.id {
+                                // print("CONTAINS (\(element.id))") // DEBUG
+                            }
                             cubeAreaAtoms.append(element)
                         }
                     }
@@ -40,7 +43,7 @@ struct CubeAreaGenerator {
             }
             cubeAreas[centralAtom] = cubeAreaAtoms
             
-            print("Germanium atoms: \(clusterCenterIndexEnumerated + 1) out of \(clusterCenters.count); cube area count: \(cubeAreas.count)", terminator: "\n")
+            // print("Germanium atoms: \(clusterCenterIndexEnumerated + 1) out of \(clusterCenters.count); cube area count: \(cubeAreas.count)", terminator: "\n")
         }
         
         return cubeAreas

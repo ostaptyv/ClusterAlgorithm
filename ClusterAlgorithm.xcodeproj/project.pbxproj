@@ -26,6 +26,8 @@
 		8434310627C31B9500620418 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434310527C31B9500620418 /* URLManager.swift */; };
 		846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */; };
 		846C7A1F264356CB00E04A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A1E264356CB00E04A83 /* main.swift */; };
+		84D6F65427C4694C00DA23FA /* MultipleRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6F65327C4694C00DA23FA /* MultipleRunner.swift */; };
+		84D6F65627C4695500DA23FA /* ConvertingStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +63,8 @@
 		846C7A142643258D00E04A83 /* ClusterAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClusterAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCountStrategy.swift; sourceTree = "<group>"; };
 		846C7A1E264356CB00E04A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		84D6F65327C4694C00DA23FA /* MultipleRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleRunner.swift; sourceTree = "<group>"; };
+		84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertingStatistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				842ED72527BA709E0003C997 /* Atom.swift */,
+				84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				846C7A1E264356CB00E04A83 /* main.swift */,
+				84D6F65327C4694C00DA23FA /* MultipleRunner.swift */,
 				842ED72827BA7AF40003C997 /* Extensions */,
 				842CCAF927C2DE3C006B4135 /* Protocols */,
 				842ED72427BA708E0003C997 /* Model */,
@@ -226,6 +232,8 @@
 				842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */,
 				842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */,
 				841E958327BD5ECD003A1B36 /* ClusterRadiusStrategy.swift in Sources */,
+				84D6F65627C4695500DA23FA /* ConvertingStatistics.swift in Sources */,
+				84D6F65427C4694C00DA23FA /* MultipleRunner.swift in Sources */,
 				842ED73827BAAA8E0003C997 /* CubeAreaGenerator.swift in Sources */,
 				842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */,
 				842ED72627BA709E0003C997 /* Atom.swift in Sources */,

@@ -17,8 +17,8 @@ struct SphereRadiusCalculator {
         
         repeat {
             previousGermaniumCountDifference = currentGermaniumCountDifference
-            print("Suggested sphere radius (lower): \(lowerRadiusBound)", terminator: "\n")
-            print("Suggested sphere radius (upper): \(upperRadiusBound)", terminator: "\n")
+            // print("Suggested sphere radius (lower): \(lowerRadiusBound)", terminator: "\n")
+            // print("Suggested sphere radius (upper): \(upperRadiusBound)", terminator: "\n")
             var atomsInSphereAreaCount = 0
             let middleRadius = ((upperRadiusBound - lowerRadiusBound) / 2) + lowerRadiusBound
             let centralAtom: Atom = .zero
@@ -41,7 +41,7 @@ struct SphereRadiusCalculator {
                 lowerRadiusBound = middleRadius
             }
             
-            print("Suggested sphere radius: \(middleRadius), count: \(atomsInSphereAreaCount)", terminator: "\n")
+            // print("Suggested sphere radius: \(middleRadius), count: \(atomsInSphereAreaCount)", terminator: "\n")
             sphereAreaRadius = middleRadius
             
         } while abs(previousGermaniumCountDifference) != abs(currentGermaniumCountDifference) || currentGermaniumCountDifference < 0

@@ -29,7 +29,7 @@ struct AtomsConverter {
                 atomData[atomToConvertIndex].type = 2
             }
             
-            print("Atoms passed: \(index) out of \(allAtomsCount)")
+            // print("Atoms passed: \(index) out of \(allAtomsCount)")
         }
     }
     
