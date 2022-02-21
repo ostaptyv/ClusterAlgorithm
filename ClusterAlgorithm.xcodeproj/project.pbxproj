@@ -23,6 +23,7 @@
 		842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73327BA8E580003C997 /* DataPreparer.swift */; };
 		842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */; };
 		842ED73827BAAA8E0003C997 /* CubeAreaGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ED73727BAAA8E0003C997 /* CubeAreaGenerator.swift */; };
+		8434310627C31B9500620418 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434310527C31B9500620418 /* URLManager.swift */; };
 		846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */; };
 		846C7A1F264356CB00E04A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A1E264356CB00E04A83 /* main.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		842ED73327BA8E580003C997 /* DataPreparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPreparer.swift; sourceTree = "<group>"; };
 		842ED73527BAA7070003C997 /* SphereRadiusCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereRadiusCalculator.swift; sourceTree = "<group>"; };
 		842ED73727BAAA8E0003C997 /* CubeAreaGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeAreaGenerator.swift; sourceTree = "<group>"; };
+		8434310527C31B9500620418 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		846C7A142643258D00E04A83 /* ClusterAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClusterAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCountStrategy.swift; sourceTree = "<group>"; };
 		846C7A1E264356CB00E04A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		841E957527BD1A27003A1B36 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8434310527C31B9500620418 /* URLManager.swift */,
 				842CCAF627C2DDED006B4135 /* FileRepository.swift */,
 				842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */,
 				842ED73327BA8E580003C997 /* DataPreparer.swift */,
@@ -231,6 +234,7 @@
 				846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */,
 				841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */,
 				842CCAF727C2DDED006B4135 /* FileRepository.swift in Sources */,
+				8434310627C31B9500620418 /* URLManager.swift in Sources */,
 				842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */,
 				841E956027BAF7D7003A1B36 /* InteratomDistanceCalculator.swift in Sources */,
 				842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */,

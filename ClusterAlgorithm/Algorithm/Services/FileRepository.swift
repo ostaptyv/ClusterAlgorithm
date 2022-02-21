@@ -10,46 +10,45 @@ import Foundation
 struct FileRepository: RepositoryProtocol {
     private let fileManager = FileManager.default
     
-    internal let fileName: String
-    private var workingFolderURL: URL {
+    let fileName: String
+    let urlManager = URLManager()
+    
+    private var readURL: URL {
         get throws {
-            var documentURL = try fileManager.url(for: .documentDirectory,
-                                                     in: .userDomainMask,
-                                                     appropriateFor: nil,
-                                                     create: false)
-            documentURL.appendPathComponent("Diploma/XcodeProjects/ClusterAlgorithm/")
-            
-            return documentURL
+            let result: URL
+            do {
+                result = try urlManager.workingFolderURL
+                    .appendingPathComponent(urlManager.sourcePath)
+                    .appendingPathComponent(fileName)
+            } catch {
+                throw "Error when composing a URL to read the file from: \(error)"
+            }
+            return result
         }
     }
-    private let sourcePath = "Source/"
-    private let resultsPath = "Results/"
+    private var writeURL: URL {
+        get throws {
+            let result: URL
+            do {
+                result = try urlManager.workingFolderURL
+                    .appendingPathComponent(urlManager.resultsPath)
+                    .appendingPathComponent(fileName)
+            } catch {
+                throw "Error when composing a URL to write the file to: \(error)"
+            }
+            return result
+        }
+    }
     
     // MARK: - Write/read methods
     
     func readData() throws -> Data {
-        let readURL: URL
-        do {
-            readURL = try workingFolderURL
-                .appendingPathComponent(sourcePath)
-                .appendingPathComponent(fileName)
-        } catch {
-            throw "Error when composing a URL to read the file from: \(error)"
-        }
+        let readURL = try readURL
         
         return try readData(fromURL: readURL)
     }
-    
     func writeData(_ data: Data) throws {
-        let writePath: String
-        do {
-            writePath = try workingFolderURL
-                .appendingPathComponent(resultsPath)
-                .appendingPathComponent(fileName)
-                .path
-        } catch {
-            throw "Error when composing a URL to write the file to: \(error)"
-        }
+        let writePath = try writeURL.path
         
         try writeData(data, atPath: writePath)
     }
