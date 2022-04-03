@@ -11,6 +11,7 @@ extension SourceNanowireCreator {
     enum EnvironmentalVariables: String {
         case seed
         case nanowireLength
+        case nanowireRadius
         case germaniumCentersPercentage
         case writeFilePath
         

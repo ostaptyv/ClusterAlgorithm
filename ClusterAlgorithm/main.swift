@@ -23,8 +23,7 @@ let layerLevels: LayerLevel = []//[.cubeArea, .sphereArea, .cluster]
 do {
     let runner = try MultipleRunner(germaniumPercentage: 0.1,
                                     nanowireVariationsCount: 1,
-                                    nanowireDimensions: .phononAnalysis,
-                                    isLogEnabled: false)
+                                    nanowireDimensions: .phononAnalysis)
     
     try runner.run(with: [1, 10, 50, 100, 500], deltaPrecision: 0.002)
 } catch {

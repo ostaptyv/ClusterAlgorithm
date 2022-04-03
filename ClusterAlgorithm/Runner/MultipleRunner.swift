@@ -13,7 +13,7 @@ struct MultipleRunner {
     
     let germaniumPercentage: Double 
     let nanowireVariations: ClosedRange<UInt>
-    let nanowireLength: Nanowire.Length
+    let nanowireDimensions: Nanowire.Dimensions
     let isLogEnabled: Bool
     
     func run(with clusterCounts: [UInt], deltaPrecisions: [Double]) throws {
@@ -28,7 +28,7 @@ struct MultipleRunner {
                 let fileName = makeFileName(clusterCount: clusterCount,
                                             variation: variation)
                 
-                let nanowire = Nanowire(length: nanowireLength,
+                let nanowire = Nanowire(dimensions: nanowireDimensions,
                                         clusterCount: clusterCount,
                                         germaniumPercentage: germaniumPercentage)
                 
@@ -89,14 +89,11 @@ struct MultipleRunner {
     
     init(germaniumPercentage: Double,
          nanowireVariationsCount: UInt,
-         nanowireLength: Nanowire.Length,
+         nanowireDimensions: Nanowire.Dimensions,
          isLogEnabled: Bool = true) throws {
         
         guard (0.0...1.0).contains(germaniumPercentage) else {
             throw "Error: Percentage of the germanium in the nanowire is bigger than 1.0 or less than 0.0"
-        }
-        guard nanowireLength.rawValue > 0.0 else {
-            throw "Error: Nanowire length can't be less or equal to zero"
         }
         guard nanowireVariationsCount >= 1 else {
             throw "Error: You have to specify variations quantity more than or equal to 1"
@@ -104,7 +101,7 @@ struct MultipleRunner {
         
         self.germaniumPercentage = germaniumPercentage
         self.nanowireVariations = 1...nanowireVariationsCount
-        self.nanowireLength = nanowireLength
+        self.nanowireDimensions = nanowireDimensions
         self.isLogEnabled = isLogEnabled
     }
 }

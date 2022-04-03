@@ -33,6 +33,7 @@
 		848DF09627FA011800D10649 /* Int+lammpsRandomSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF09527FA011800D10649 /* Int+lammpsRandomSeed.swift */; };
 		84D6F65427C4694C00DA23FA /* MultipleRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6F65327C4694C00DA23FA /* MultipleRunner.swift */; };
 		84D6F65627C4695500DA23FA /* ConvertingStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */; };
+		84DDB39F27FA2BF4007DE5FA /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB39E27FA2BF4007DE5FA /* Dimensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,7 @@
 		848DF09527FA011800D10649 /* Int+lammpsRandomSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+lammpsRandomSeed.swift"; sourceTree = "<group>"; };
 		84D6F65327C4694C00DA23FA /* MultipleRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleRunner.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertingStatistics.swift; sourceTree = "<group>"; };
+		84DDB39E27FA2BF4007DE5FA /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				842ED72527BA709E0003C997 /* Atom.swift */,
 				84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */,
 				848DF09327F9FB7300D10649 /* Nanowire.swift */,
+				84DDB39E27FA2BF4007DE5FA /* Dimensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				841E956227BC6E29003A1B36 /* AtomsConverter.swift in Sources */,
 				841E955E27BAE5CB003A1B36 /* SphereAreaGenerator.swift in Sources */,
 				846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */,
+				84DDB39F27FA2BF4007DE5FA /* Dimensions.swift in Sources */,
 				841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */,
 				842CCAF727C2DDED006B4135 /* FileRepository.swift in Sources */,
 				8434310627C31B9500620418 /* URLManager.swift in Sources */,

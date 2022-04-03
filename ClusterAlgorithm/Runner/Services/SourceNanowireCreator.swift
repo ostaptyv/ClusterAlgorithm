@@ -13,7 +13,7 @@ struct SourceNanowireCreator {
     
     let fileName: String
     let germaniumCentersPercentage: Double
-    let nanowireLength: Nanowire.Length
+    let nanowireDimensions: Nanowire.Dimensions
     let isLogEnabled: Bool
     
     private var sourcePath: String {
@@ -40,7 +40,9 @@ struct SourceNanowireCreator {
     private func writeEnvironmentalVariables(seed: Int) throws {
         let environmentalVariablesToWrite: [EnvironmentalVariables: Any] = [
             .seed: seed,
-            .nanowireLength: nanowireLength.rawValue,
+            .nanowireLength: nanowireDimensions.length,
+            .nanowireRadius: nanowireDimensions.radius,
+            // CALIBRATION:
             .germaniumCentersPercentage: germaniumCentersPercentage,
             .writeFilePath: try sourcePath
         ]
@@ -70,19 +72,16 @@ struct SourceNanowireCreator {
     
     init(fileName: String,
          germaniumCentersPercentage: Double,
-         nanowireLength: Nanowire.Length,
+         nanowireDimensions: Nanowire.Dimensions,
          isLogEnabled: Bool = true) throws {
         
         guard (0.0...1.0).contains(germaniumCentersPercentage) else {
             throw "Error: Percentage of the germanium centers is bigger than 1.0 or less than 0.0"
         }
-        guard nanowireLength.rawValue > 0.0 else {
-            throw "Error: Nanowire length can't be less or equal to zero"
-        }
         
         self.fileName = fileName
         self.germaniumCentersPercentage = germaniumCentersPercentage
-        self.nanowireLength = nanowireLength
+        self.nanowireDimensions = nanowireDimensions
         self.isLogEnabled = isLogEnabled
     }
 }

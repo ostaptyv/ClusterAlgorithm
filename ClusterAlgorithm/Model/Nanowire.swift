@@ -8,30 +8,36 @@
 import Foundation
 
 struct Nanowire {
-    let length: Length
+    let dimensions: Dimensions
+    var length: Double {
+        return dimensions.length
+    }
+    var radius: Double {
+        return dimensions.radius
+    }
+    
     let clusterCount: UInt
     let germaniumPercentage: Double
     
     var germaniumCentersPercentage: Double {
         return germaniumPercentage / Double(clusterCount)
     }
-}
-
-extension Nanowire {
-    enum Length {
-        case full
-        case phononAnalysis
-        case other(Double)
+    
+    init(dimensions: Dimensions,
+         clusterCount: UInt,
+         germaniumPercentage: Double) {
         
-        var rawValue: Double {
-            switch self {
-            case .full:
-                return 488.88
-            case .phononAnalysis:
-                return 19.45
-            case .other(let length):
-                return length
-            }
-        }
+        self.dimensions = dimensions
+        self.clusterCount = clusterCount
+        self.germaniumPercentage = germaniumPercentage
+    }
+    init(length: Double,
+         radius: Double,
+         clusterCount: UInt,
+         germaniumPercentage: Double) throws {
+        
+        self.dimensions = try Dimensions(length: length, radius: radius)
+        self.clusterCount = clusterCount
+        self.germaniumPercentage = germaniumPercentage
     }
 }
