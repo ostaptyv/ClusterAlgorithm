@@ -8,8 +8,16 @@
 import Foundation
 
 struct URLManager {
-    let sourcePath = "Source/"
-    let resultsPath = "Results/"
+    var sourceURL: URL {
+        get throws {
+            return try workingFolderURL.appendingPathComponent("Source/")
+        }
+    }
+    var resultsURL: URL {
+        get throws {
+            return try workingFolderURL.appendingPathComponent("Results/")
+        }
+    }
     
     var workingFolderURL: URL {
         get throws {

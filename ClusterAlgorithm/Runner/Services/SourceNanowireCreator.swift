@@ -18,8 +18,7 @@ struct SourceNanowireCreator {
     
     private var sourcePath: String {
         get throws {
-            return try urlManager.workingFolderURL
-                .appendingPathComponent(urlManager.sourcePath)
+            return try urlManager.sourceURL
                 .appendingPathComponent(fileName)
                 .path
         }

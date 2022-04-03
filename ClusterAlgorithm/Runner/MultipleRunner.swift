@@ -60,14 +60,12 @@ struct MultipleRunner {
     // MARK: - Private methods
     
     private func createSourceFolder() throws {
-        let sourceURL = try urlManager.workingFolderURL
-            .appendingPathComponent(urlManager.sourcePath)
+        let sourceURL = try urlManager.sourceURL
         try fileManager.createDirectory(at: sourceURL, withIntermediateDirectories: true)
         
     }
     private func createResultsFolder() throws {
-        let resultsURL = try urlManager.workingFolderURL
-            .appendingPathComponent(urlManager.resultsPath)
+        let resultsURL = try urlManager.resultsURL
         try fileManager.createDirectory(at: resultsURL, withIntermediateDirectories: true)
     }
     

@@ -102,7 +102,6 @@
 		841E957527BD1A27003A1B36 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8434310527C31B9500620418 /* URLManager.swift */,
 				842CCAF627C2DDED006B4135 /* FileRepository.swift */,
 				842ED73127BA81EA0003C997 /* LAMMPSSerializer.swift */,
 				842ED73327BA8E580003C997 /* DataPreparer.swift */,
@@ -179,6 +178,7 @@
 				842ED72827BA7AF40003C997 /* Extensions */,
 				842CCAF927C2DE3C006B4135 /* Protocols */,
 				842ED72427BA708E0003C997 /* Model */,
+				84DDB3A027FA4958007DE5FA /* Shared */,
 				848DF08827F9DD5C00D10649 /* Runner */,
 				842ED72727BA7AB20003C997 /* Algorithm */,
 			);
@@ -210,6 +210,14 @@
 				848DF08F27F9EBAB00D10649 /* EnvironmentalVariables.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		84DDB3A027FA4958007DE5FA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8434310527C31B9500620418 /* URLManager.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

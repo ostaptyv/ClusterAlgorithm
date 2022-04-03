@@ -17,8 +17,7 @@ struct FileRepository: RepositoryProtocol {
         get throws {
             let result: URL
             do {
-                result = try urlManager.workingFolderURL
-                    .appendingPathComponent(urlManager.sourcePath)
+                result = try urlManager.sourceURL
                     .appendingPathComponent(fileName)
             } catch {
                 throw "Error when composing a URL to read the file from: \(error)"
@@ -30,8 +29,7 @@ struct FileRepository: RepositoryProtocol {
         get throws {
             let result: URL
             do {
-                result = try urlManager.workingFolderURL
-                    .appendingPathComponent(urlManager.resultsPath)
+                result = try urlManager.resultsURL
                     .appendingPathComponent(fileName)
             } catch {
                 throw "Error when composing a URL to write the file to: \(error)"
@@ -58,7 +56,7 @@ struct FileRepository: RepositoryProtocol {
         } catch CocoaError.fileWriteFileExists {
             try copyDataReplacingExisting()
         } catch {
-            throw "Error when copying a file into \"\(urlManager.resultsPath)\" (couldn't recover): \(error)"
+            throw "Error when copying a file into \"\(try urlManager.resultsURL)\" (couldn't recover): \(error)"
         }
     }
     
@@ -87,7 +85,7 @@ struct FileRepository: RepositoryProtocol {
             try fileManager.removeItem(at: writeURL)
             try fileManager.copyItem(at: readURL, to: writeURL)
         } catch {
-            throw "Error when copying a file into \"\(urlManager.resultsPath)\" (replacing an existing file with the new one both of which share the same name): \(error)"
+            throw "Error when copying a file into \"\(try urlManager.resultsURL)\" (replacing an existing file with the new one both of which share the same name): \(error)"
         }
     }
     
