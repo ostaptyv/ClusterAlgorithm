@@ -161,13 +161,21 @@
 			isa = PBXGroup;
 			children = (
 				846C7A1E264356CB00E04A83 /* main.swift */,
-				84D6F65327C4694C00DA23FA /* MultipleRunner.swift */,
 				842ED72827BA7AF40003C997 /* Extensions */,
 				842CCAF927C2DE3C006B4135 /* Protocols */,
 				842ED72427BA708E0003C997 /* Model */,
+				848DF08827F9DD5C00D10649 /* Runner */,
 				842ED72727BA7AB20003C997 /* Algorithm */,
 			);
 			path = ClusterAlgorithm;
+			sourceTree = "<group>";
+		};
+		848DF08827F9DD5C00D10649 /* Runner */ = {
+			isa = PBXGroup;
+			children = (
+				84D6F65327C4694C00DA23FA /* MultipleRunner.swift */,
+			);
+			path = Runner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
