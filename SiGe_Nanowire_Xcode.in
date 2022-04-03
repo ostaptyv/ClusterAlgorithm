@@ -6,7 +6,7 @@ variable          nL equal  90
 variable          aSi equal 5.432 
 variable          R_nw equal v_aSi*5
 variable          L_nw getenv xcode_ClusterAlgorithm_nanowireLength #v_aSi*v_nL
-variable          xGe getenv xcode_ClusterAlgorithm_percentageOfCenters
+variable          xGe getenv xcode_ClusterAlgorithm_germaniumCentersPercentage
 
 variable          Temperature equal   300 
 variable          dt equal 0.5e-3

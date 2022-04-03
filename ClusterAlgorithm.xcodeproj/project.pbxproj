@@ -26,6 +26,11 @@
 		8434310627C31B9500620418 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434310527C31B9500620418 /* URLManager.swift */; };
 		846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */; };
 		846C7A1F264356CB00E04A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A1E264356CB00E04A83 /* main.swift */; };
+		848DF08B27F9DDE800D10649 /* SourceNanowireCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF08A27F9DDE800D10649 /* SourceNanowireCreator.swift */; };
+		848DF09027F9EBAB00D10649 /* EnvironmentalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF08F27F9EBAB00D10649 /* EnvironmentalVariables.swift */; };
+		848DF09227F9F5D000D10649 /* ClusterGenerationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF09127F9F5D000D10649 /* ClusterGenerationTask.swift */; };
+		848DF09427F9FB7300D10649 /* Nanowire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF09327F9FB7300D10649 /* Nanowire.swift */; };
+		848DF09627FA011800D10649 /* Int+lammpsRandomSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF09527FA011800D10649 /* Int+lammpsRandomSeed.swift */; };
 		84D6F65427C4694C00DA23FA /* MultipleRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6F65327C4694C00DA23FA /* MultipleRunner.swift */; };
 		84D6F65627C4695500DA23FA /* ConvertingStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */; };
 /* End PBXBuildFile section */
@@ -63,7 +68,12 @@
 		846C7A142643258D00E04A83 /* ClusterAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClusterAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCountStrategy.swift; sourceTree = "<group>"; };
 		846C7A1E264356CB00E04A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		84D6F65327C4694C00DA23FA /* MultipleRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleRunner.swift; sourceTree = "<group>"; };
+		848DF08A27F9DDE800D10649 /* SourceNanowireCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceNanowireCreator.swift; sourceTree = "<group>"; };
+		848DF08F27F9EBAB00D10649 /* EnvironmentalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentalVariables.swift; sourceTree = "<group>"; };
+		848DF09127F9F5D000D10649 /* ClusterGenerationTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterGenerationTask.swift; sourceTree = "<group>"; };
+		848DF09327F9FB7300D10649 /* Nanowire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nanowire.swift; sourceTree = "<group>"; };
+		848DF09527FA011800D10649 /* Int+lammpsRandomSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+lammpsRandomSeed.swift"; sourceTree = "<group>"; };
+		84D6F65327C4694C00DA23FA /* MultipleRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleRunner.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertingStatistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +127,7 @@
 			children = (
 				842ED72527BA709E0003C997 /* Atom.swift */,
 				84D6F65527C4695500DA23FA /* ConvertingStatistics.swift */,
+				848DF09327F9FB7300D10649 /* Nanowire.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +148,7 @@
 				842ED72927BA7B070003C997 /* String+LocalizedError.swift */,
 				842ED72B27BA7B280003C997 /* Array+chunk.swift */,
 				842ED72D27BA7B420003C997 /* Array+atomDescription.swift */,
+				848DF09527FA011800D10649 /* Int+lammpsRandomSeed.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -174,8 +186,27 @@
 			isa = PBXGroup;
 			children = (
 				84D6F65327C4694C00DA23FA /* MultipleRunner.swift */,
+				848DF08E27F9EB9F00D10649 /* Models */,
+				848DF08927F9DDCE00D10649 /* Services */,
 			);
 			path = Runner;
+			sourceTree = "<group>";
+		};
+		848DF08927F9DDCE00D10649 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				848DF09127F9F5D000D10649 /* ClusterGenerationTask.swift */,
+				848DF08A27F9DDE800D10649 /* SourceNanowireCreator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		848DF08E27F9EB9F00D10649 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				848DF08F27F9EBAB00D10649 /* EnvironmentalVariables.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848DF09427F9FB7300D10649 /* Nanowire.swift in Sources */,
 				846C7A1F264356CB00E04A83 /* main.swift in Sources */,
+				848DF08B27F9DDE800D10649 /* SourceNanowireCreator.swift in Sources */,
+				848DF09627FA011800D10649 /* Int+lammpsRandomSeed.swift in Sources */,
 				842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */,
 				842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */,
 				842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */,
@@ -243,6 +277,7 @@
 				84D6F65627C4695500DA23FA /* ConvertingStatistics.swift in Sources */,
 				84D6F65427C4694C00DA23FA /* MultipleRunner.swift in Sources */,
 				842ED73827BAAA8E0003C997 /* CubeAreaGenerator.swift in Sources */,
+				848DF09227F9F5D000D10649 /* ClusterGenerationTask.swift in Sources */,
 				842ED73627BAA7070003C997 /* SphereRadiusCalculator.swift in Sources */,
 				842ED72627BA709E0003C997 /* Atom.swift in Sources */,
 				841E956227BC6E29003A1B36 /* AtomsConverter.swift in Sources */,
@@ -251,6 +286,7 @@
 				841E956627BC871A003A1B36 /* ClusterAlgorithm.swift in Sources */,
 				842CCAF727C2DDED006B4135 /* FileRepository.swift in Sources */,
 				8434310627C31B9500620418 /* URLManager.swift in Sources */,
+				848DF09027F9EBAB00D10649 /* EnvironmentalVariables.swift in Sources */,
 				842ED73227BA81EA0003C997 /* LAMMPSSerializer.swift in Sources */,
 				841E956027BAF7D7003A1B36 /* InteratomDistanceCalculator.swift in Sources */,
 				842ED72E27BA7B420003C997 /* Array+atomDescription.swift in Sources */,

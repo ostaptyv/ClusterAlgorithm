@@ -11,4 +11,11 @@ struct ConvertingStatistics {
     var clusterAtomsCountBefore: Int
     var clusterAtomsCountAfter: Int
     var atomsCountGeneral: Int
+    
+    var clusterAtomsPercentageAfter: Double {
+        let clusterCountAfter = Double(clusterAtomsCountAfter)
+        let clusterCountGeneral = Double(atomsCountGeneral)
+        
+        return clusterCountAfter / clusterCountGeneral
+    }
 }
