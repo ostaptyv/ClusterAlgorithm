@@ -27,6 +27,13 @@ extension Nanowire {
 }
 
 extension Nanowire.Dimensions {
-    static let siliciumNanowire = try! Nanowire.Dimensions(length: 488.88, radius: 5 * 5.432)
-    static let phononAnalysis = try! Nanowire.Dimensions(length: 19.45 * 2, radius: 3 * 5.432)
+    static let siliciumNanowire = try! Nanowire.Dimensions(length: 488.88, radius: .a * 5)
+    static let phononAnalysis = try! Nanowire.Dimensions(length: 19.45 * 2, radius: .a * 3)
+    static func a(length lengthMultipleOfLatticeConstant: UInt,
+                  radius radiusMultipleOfLatticeConstant: UInt) -> Nanowire.Dimensions {
+        
+        let length = Double(lengthMultipleOfLatticeConstant)
+        let radius = Double(radiusMultipleOfLatticeConstant)
+        return try! Nanowire.Dimensions(length: .a * length, radius: .a * radius)
+    }
 }
