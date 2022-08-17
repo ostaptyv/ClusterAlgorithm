@@ -9,17 +9,6 @@ import Foundation
 
 fileprivate let fileName = "Ge0,5-10-1.data"
 
-struct LayerLevel: OptionSet {
-    let rawValue: Int
-    
-    static let cubeArea = LayerLevel(rawValue: 1 << 0)
-    static let sphereArea = LayerLevel(rawValue: 1 << 1)
-    static let cluster = LayerLevel(rawValue: 1 << 2)
-}
-
-// For debug purposes only:
-let layerLevels: LayerLevel = []//[.cubeArea, .sphereArea, .cluster]
-
 do {
     let runner = try MultipleRunner(germaniumPercentage: 0.1,
                                     nanowireVariationsCount: 1,

@@ -7,6 +7,10 @@
 
 import Foundation
 
+// TODO: Find a better way to debug structures
+// For debug purposes only:
+let layerLevels: LayerLevel = []//[.cubeArea, .sphereArea, .cluster]
+
 struct AtomsConverter {
     var cubeAreaIndices: [Int]?
     var sphereAreaIndices: [Int]?

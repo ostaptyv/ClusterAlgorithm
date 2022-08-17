@@ -27,6 +27,7 @@
 		844FE5EA2891D9E800E5D7A8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844FE5E92891D9E800E5D7A8 /* Constants.swift */; };
 		846C7A182643258D00E04A83 /* ClusterCountStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */; };
 		846C7A1F264356CB00E04A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C7A1E264356CB00E04A83 /* main.swift */; };
+		8487745F28AD6A2A004514A3 /* LayerLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487745E28AD6A2A004514A3 /* LayerLevel.swift */; };
 		848DF08B27F9DDE800D10649 /* SourceNanowireCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF08A27F9DDE800D10649 /* SourceNanowireCreator.swift */; };
 		848DF09027F9EBAB00D10649 /* EnvironmentalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF08F27F9EBAB00D10649 /* EnvironmentalVariables.swift */; };
 		848DF09227F9F5D000D10649 /* ClusterGenerationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF09127F9F5D000D10649 /* ClusterGenerationTask.swift */; };
@@ -71,6 +72,7 @@
 		846C7A142643258D00E04A83 /* ClusterAlgorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClusterAlgorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		846C7A172643258D00E04A83 /* ClusterCountStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCountStrategy.swift; sourceTree = "<group>"; };
 		846C7A1E264356CB00E04A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8487745E28AD6A2A004514A3 /* LayerLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerLevel.swift; sourceTree = "<group>"; };
 		848DF08A27F9DDE800D10649 /* SourceNanowireCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceNanowireCreator.swift; sourceTree = "<group>"; };
 		848DF08F27F9EBAB00D10649 /* EnvironmentalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentalVariables.swift; sourceTree = "<group>"; };
 		848DF09127F9F5D000D10649 /* ClusterGenerationTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterGenerationTask.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				841E956527BC871A003A1B36 /* ClusterAlgorithm.swift */,
+				8487746028AD6A3E004514A3 /* OptionSets */,
 				841E957427BD1A13003A1B36 /* Strategies */,
 				841E957527BD1A27003A1B36 /* Services */,
 			);
@@ -186,6 +189,14 @@
 				842ED72727BA7AB20003C997 /* Algorithm */,
 			);
 			path = ClusterAlgorithm;
+			sourceTree = "<group>";
+		};
+		8487746028AD6A3E004514A3 /* OptionSets */ = {
+			isa = PBXGroup;
+			children = (
+				8487745E28AD6A2A004514A3 /* LayerLevel.swift */,
+			);
+			path = OptionSets;
 			sourceTree = "<group>";
 		};
 		848DF08827F9DD5C00D10649 /* Runner */ = {
@@ -285,6 +296,7 @@
 				848DF08B27F9DDE800D10649 /* SourceNanowireCreator.swift in Sources */,
 				848DF09627FA011800D10649 /* Int+lammpsRandomSeed.swift in Sources */,
 				842ED72A27BA7B070003C997 /* String+LocalizedError.swift in Sources */,
+				8487745F28AD6A2A004514A3 /* LayerLevel.swift in Sources */,
 				842ED72C27BA7B280003C997 /* Array+chunk.swift in Sources */,
 				842ED73427BA8E580003C997 /* DataPreparer.swift in Sources */,
 				841E958327BD5ECD003A1B36 /* ClusterRadiusStrategy.swift in Sources */,
