@@ -15,7 +15,7 @@ enum ClusterMetric {
 class ClusterAlgorithm {
     private var strategy: ClusterStrategyProtocol!
     
-    /// The file name with file extension being processed by this strategy.
+    /// The file name with the file extension being processed by the algorithm
     ///
     /// The property should not contain any other paths, schemes, arguments, etc.
     ///
