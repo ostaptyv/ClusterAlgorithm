@@ -8,6 +8,8 @@
 import Foundation
 
 struct LAMMPSSerializer {
+    private let startString = "Atoms # atomic\n\n"
+    private let endString = "\n\n"
     
     func encode(from atomData: [Atom], originalTextData: String) throws -> String {
         // Prepare algorithm results to be written to the file
@@ -26,7 +28,7 @@ struct LAMMPSSerializer {
         .appending("\n")
 
         // FIXME: FIXME: Implement non-mutating original data file feature, then delete this code:
-        let atomDataRange = try findAtomDataRange(in: originalTextData, start: "Atoms # atomic\n\n", end: "\n\n")
+        let atomDataRange = try findAtomDataRange(in: originalTextData, start: startString, end: endString)
         let modifiedTextData = originalTextData.replacingCharacters(in: atomDataRange, with: textAtomData)
         
         return modifiedTextData
@@ -36,7 +38,7 @@ struct LAMMPSSerializer {
         // Separate atom data away from service data
         var atomTextData: String!
         do {
-            atomTextData = try retrieveAtomData(fromString: fileTextData, start: "Atoms # atomic\n\n", end: "\n\n")
+            atomTextData = try retrieveAtomData(fromString: fileTextData, start: startString, end: endString)
         } catch {
             throw "Error: \(error)"
         }
