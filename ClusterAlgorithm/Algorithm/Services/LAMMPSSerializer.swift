@@ -91,7 +91,7 @@ struct LAMMPSSerializer {
     }
 
     private func retrieveAtomData(fromString dataString: String, start: String, end: String) throws -> String {
-        let atomDataRange = try findAtomDataRange(in: dataString, start: "Atoms # atomic\n\n", end: "\n\n")
+        let atomDataRange = try findAtomDataRange(in: dataString, start: start, end: end)
         return String(dataString[atomDataRange])
     }
 }
