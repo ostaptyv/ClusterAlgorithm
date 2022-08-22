@@ -7,8 +7,6 @@
 
 import Foundation
 
-fileprivate let fileName = "Ge0,5-10-1.data"
-
 do {
     let runner = try MultipleRunner(germaniumPercentage: 0.1,
                                     nanowireVariationsCount: 1,
