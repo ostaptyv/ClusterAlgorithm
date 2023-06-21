@@ -8,11 +8,11 @@
 import Foundation
 
 do {
-    let runner = try MultipleRunner(germaniumPercentage: 0.1,
+    let runner = try MultipleRunner(germaniumPercentage: 0.5,
                                     nanowireVariationsCount: 1,
-                                    nanowireDimensions: .phononAnalysis)
+                                    nanowireDimensions: .siliciumNanowire)
     
-    try runner.run(with: [1, 10, 50, 100, 500], deltaPrecision: 0.002)
+    try runner.run(with: [50], deltaPrecision: 0.002)
 } catch {
     print("⛔️ " + error.localizedDescription)
     print("Operation aborted.")

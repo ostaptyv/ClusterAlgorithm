@@ -16,7 +16,7 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
     private let cubeAreaGenerator = CubeAreaGenerator()
     private let sphereAreaGenerator = SphereAreaGenerator()
     private let interatomDistanceCalculator = InteratomDistanceCalculator()
-    private let atomsConverter = AtomsConverter()
+    private var atomsConverter = AtomsConverter()
     
     let atomsInClusterCount: Int
     var fileNameURL: URL? {
@@ -63,6 +63,7 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
                 .defineSphereRadius(forCount: atomsInClusterCount,
                                     in: atomData,
                                     limitingRadiusUpTo: upperRadiusBound)
+            
         }
         
         // Create cubic areas around germanium atoms
@@ -99,6 +100,25 @@ class ClusterCountStrategy: ClusterStrategyProtocol {
                 .map { atom in
                     return atom.id
                 }
+            let cubeIndices = cubeAreas
+                .map { (key: Atom, value: [Atom]) in
+                    return value
+                        .map { atom in
+                            return atom.id
+                        }
+                }
+                .flatMap { $0 }
+            let sphereIndices = sphereAreas
+                .map { (key: Atom, value: [Atom]) in
+                    return value
+                        .map { atom in
+                            return atom.id
+                        }
+                }
+                .flatMap { $0 }
+            
+            atomsConverter.cubeAreaIndices = cubeIndices
+            atomsConverter.sphereAreaIndices = sphereIndices
             
             atomsConverter.convertAtoms(atPositions: atomIndicesToConvert,
                                         in: &atomData)

@@ -8,7 +8,7 @@
 import Foundation
 
 struct LAMMPSSerializer {
-    private let startString = "Atoms # atomic\n\n"
+    private let startString = "ITEM: ATOMS id type xs ys zs\n"
     private let endString = "\n\n"
     
     func encode(from atomData: [Atom], originalTextData: String) throws -> String {
@@ -81,15 +81,18 @@ struct LAMMPSSerializer {
             throw "Error: Given start string not found in the data file"
         }
         
-        let optionalEndIndex = dataString.range(of: end,
-                                                range: startIndex..<dataString.endIndex)? // we search for the end (terminating) string after we found the start string
+        let optionalEndIndex = dataString
+            .range(of: end,
+                   range: startIndex..<dataString.endIndex)? // we search for the end (terminating) string after we found the start string
             .lowerBound
         
-        guard let endIndex = optionalEndIndex else {
-            throw "Error: Given end string not found in the data file"
+        if let endIndex = optionalEndIndex {
+            return startIndex...endIndex
+        } else {
+//            print("WARNING: Given end string not found in the data file, so will use endIndex of the string")
+            let dataStringEndIndex = dataString.index(dataString.endIndex, offsetBy: -1)
+            return startIndex...dataStringEndIndex
         }
-        
-        return startIndex...endIndex
     }
 
     private func retrieveAtomData(fromString dataString: String, start: String, end: String) throws -> String {
